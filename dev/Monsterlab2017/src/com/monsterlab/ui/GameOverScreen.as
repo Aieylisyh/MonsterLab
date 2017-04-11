@@ -6,6 +6,7 @@ package com.monsterlab.ui {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
@@ -23,8 +24,8 @@ package com.monsterlab.ui {
 		protected static var instance: GameOverScreen;
 		
 		protected var bmp:Bitmap;
-		public var btnRetry:Button;
-		public var btnMenu:Button;
+		public var btnRetry:SimpleButton;
+		public var btnMenu:SimpleButton;
 		public var mcBackground:Sprite;
 		public var mcScore:MovieClip;
 		
@@ -34,11 +35,11 @@ package com.monsterlab.ui {
 			
 			//mcScore.txtScore.text = Hud.getInstance().mcTopCenter.txtScore.text;
 			
-			btnRetry = new Button("BtnRestart", GameManager.getInstance().restart, 0, 90);
+			//btnRetry = new Button("BtnRestart", GameManager.getInstance().restart, 0, 90);
 			addChild(btnRetry);
 			
 			//A changer par un bouton menu
-			btnMenu = new Button("BtnQuit", Main.getInstance().exit, 0, 200);
+			//btnMenu = new Button("BtnQuit", Main.getInstance().exit, 0, 200);
 			addChild(btnMenu);
 			
 			//Changer juste le Win par GameOver
@@ -64,6 +65,18 @@ package com.monsterlab.ui {
 			return instance;
 		}
 		
+		private function addListeners():void {
+			//btnPlay.addEventListener(MouseEvent.CLICK, startGame);
+			//btnOptions.addEventListener(MouseEvent.CLICK, startGame);
+			//btnCredits.addEventListener(MouseEvent.CLICK, startGame);
+		}
+		
+		private function removeListeners():void {
+			//btnPlay.removeEventListener(MouseEvent.CLICK, startGame);
+			//btnOptions.removeEventListener(MouseEvent.CLICK, startGame);
+			//btnCredits.removeEventListener(MouseEvent.CLICK, startGame);
+		}
+		
 		private function restart():void {
 			UIManager.getInstance().closeScreens();
 			GameManager.getInstance().restart();
@@ -80,9 +93,9 @@ package com.monsterlab.ui {
 			removeChild(bmp);
 			bmp = null;
 			instance = null;
-			btnRetry.destroy();
+			//btnRetry.destroy();
 			btnRetry = null;
-			btnMenu.destroy();
+			//btnMenu.destroy();
 			btnMenu = null;
 			super.destroy();
 		}

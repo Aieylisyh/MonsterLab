@@ -2,10 +2,12 @@ package com.monsterlab.ui {
 	import com.monsterlab.GameManager;
 	import com.monsterlab.sprites.gameobjects.Button;
 	import com.monsterlab.ui.Screen;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.UIManager;
+	import flash.events.MouseEvent;
 	public class TitleCard extends Screen 
 	{
 		
@@ -16,27 +18,30 @@ package com.monsterlab.ui {
 
 		
 		public var mcBackground:Sprite;
-		public var btnPlay:Button;
-		public var btnOptions:Button;
-		public var btnCredits:Button;
+		public var btnPlay:SimpleButton;
+		public var btnOptions:SimpleButton;
+		public var btnCredits:SimpleButton;
 
 		public function TitleCard() 
 		{
 			super();
-
-			btnPlay = new Button("Btn4", startGame, 0, 40);
-			//btnOptions = new Button("", startGame, 0, 40);
-			//btnCredits = new Button("", startGame, 0, 40);
-
-			addChild(btnPlay);
-			//addChild(btnOptions);
-			//addChild(btnCredits);
-
 		}
 		
 		public static function getInstance (): TitleCard {
 			if (instance == null) instance = new TitleCard();
 			return instance;
+		}
+		
+		private function addListeners():void {
+			btnPlay.addEventListener(MouseEvent.CLICK, startGame);
+			//btnOptions.addEventListener(MouseEvent.CLICK, startGame);
+			//btnCredits.addEventListener(MouseEvent.CLICK, startGame);
+		}
+		
+		private function removeListeners():void {
+			btnPlay.removeEventListener(MouseEvent.CLICK, startGame);
+			//btnOptions.removeEventListener(MouseEvent.CLICK, startGame);
+			//btnCredits.removeEventListener(MouseEvent.CLICK, startGame);
 		}
 		
 		private function startGame():void {
@@ -57,10 +62,10 @@ package com.monsterlab.ui {
 		 */
 		override public function destroy (): void {
 			instance = null;
-			btnPlay.destroy();
+			//btnPlay.destroy();
 			//btnOptions.destroy();
 			//btnCredits.destroy();
-			btnPlay = null;
+			//btnPlay = null;
 			//btnOptions = null;
 			//btnCredits = null;
 			super.destroy();
