@@ -2,10 +2,12 @@ package com.monsterlab.ui {
 	import com.monsterlab.GameManager;
 	import com.monsterlab.sprites.gameobjects.Button;
 	import com.monsterlab.ui.Screen;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.UIManager;
+	import flash.events.MouseEvent;
 	public class TitleCard extends Screen 
 	{
 		
@@ -15,23 +17,18 @@ package com.monsterlab.ui {
 		protected static var instance: TitleCard;
 
 		
-		public var mcBackground:Sprite;
-		public var btnPlay:Button;
-		public var btnOptions:Button;
-		public var btnCredits:Button;
+		//public var mcBackground:Sprite;
+		public var btnPlay:SimpleButton;
+		public var btnOption:SimpleButton;
+		public var btnCredit:SimpleButton;
 
 		public function TitleCard() 
 		{
 			super();
-
-			btnPlay = new Button("Btn4", startGame, 0, 40);
-			//btnOptions = new Button("", startGame, 0, 40);
-			//btnCredits = new Button("", startGame, 0, 40);
-
-			addChild(btnPlay);
-			//addChild(btnOptions);
-			//addChild(btnCredits);
-
+		}
+		
+		public function initBtn():void {
+			addListeners();	
 		}
 		
 		public static function getInstance (): TitleCard {
@@ -39,16 +36,29 @@ package com.monsterlab.ui {
 			return instance;
 		}
 		
-		private function startGame():void {
+		override protected function addListeners():void {
+			btnPlay.addEventListener(MouseEvent.CLICK, startGame);
+			btnOption.addEventListener(MouseEvent.CLICK, onClickOption);
+			btnCredit.addEventListener(MouseEvent.CLICK, onClickCredit);
+		}
+		
+		override protected function removeListeners():void {
+			btnPlay.removeEventListener(MouseEvent.CLICK, startGame);
+			btnOption.removeEventListener(MouseEvent.CLICK, onClickOption);
+			btnCredit.removeEventListener(MouseEvent.CLICK, onClickCredit);
+		}
+		
+		private function startGame(pEvent:MouseEvent):void {
+			trace("patate");
 			GameManager.getInstance().startGame();
 		}
 		
-		private function onClickOptions():void {
+		private function onClickOption(pEvent:MouseEvent):void {
 			OptionScreen.wasTitleCard = true;
 			UIManager.getInstance().addScreen(OptionScreen.getInstance());
 		}
 		
-		private function onClickCredits():void {
+		private function onClickCredit(pEvent:MouseEvent):void {
 			UIManager.getInstance().addScreen(CreditScreen.getInstance());
 		}
 		
@@ -56,13 +66,7 @@ package com.monsterlab.ui {
 		 * détruit l'instance unique et met sa référence interne à null
 		 */
 		override public function destroy (): void {
-			instance = null;
-			btnPlay.destroy();
-			//btnOptions.destroy();
-			//btnCredits.destroy();
-			btnPlay = null;
-			//btnOptions = null;
-			//btnCredits = null;
+			instance = null;			
 			super.destroy();
 		}
 

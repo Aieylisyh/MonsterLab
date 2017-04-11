@@ -2,10 +2,12 @@ package com.monsterlab.ui {
 	import com.monsterlab.GameManager;
 	import com.monsterlab.sprites.gameobjects.Button;
 	import com.monsterlab.ui.Screen;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.UIManager;
+	import flash.events.MouseEvent;
 	
 	public class PauseScreen extends Screen 
 	{
@@ -17,27 +19,14 @@ package com.monsterlab.ui {
 
 		
 		public var mcBackground:Sprite;
-		public var btnResume:Button;
-		public var BtnMenu:Button;
-		public var BtnOptions:Button;
-		public var BtnRetry:Button;
+		public var btnResume:SimpleButton;
+		public var btnMenu:SimpleButton;
+		public var btnOption:SimpleButton;
+		public var btnRetry:SimpleButton;
 
-		public function OptionScreen() 
+		public function PauseScreen() 
 		{
 			super();
-
-			btnResume = new Button("Btn4", onClickSound, 0, 40);
-			addChild(btnResume);
-			
-			//btnOptions = new Button("", onClickOptions, 0, 40);
-			//addChild(btnBack);
-			
-			btnRetry = new Button("BtnRestart", GameManager.getInstance().restart, 0, 90);
-			addChild(btnRetry);
-			
-			btnMenu = new Button("BtnQuit", onClickMenu, 0, 200);
-			addChild(btnExit);
-
 		}
 		
 		public static function getInstance (): PauseScreen {
@@ -45,22 +34,37 @@ package com.monsterlab.ui {
 			return instance;
 		}
 		
-		private function onClickOptions():void {
-			OptionScreen.wasTitleCard = true;
+		override protected function addListeners():void {
+			btnResume.addEventListener(MouseEvent.CLICK, onClickResume);
+			btnOption.addEventListener(MouseEvent.CLICK, onClickOption);
+			btnMenu.addEventListener(MouseEvent.CLICK, onClickMenu);
+			btnRetry.addEventListener(MouseEvent.CLICK, restart);
+		}
+		
+		override protected function removeListeners():void {
+			btnResume.removeEventListener(MouseEvent.CLICK, onClickResume);
+			btnOption.removeEventListener(MouseEvent.CLICK, onClickOption);
+			btnMenu.removeEventListener(MouseEvent.CLICK, onClickMenu);
+			btnRetry.removeEventListener(MouseEvent.CLICK, restart);
+		}
+		
+		private function onClickOption(pEvent:MouseEvent):void {
+			OptionScreen.wasTitleCard = false;
 			UIManager.getInstance().addScreen(OptionScreen.getInstance());
 		}
 		
-		private function onClickResume():void {
+		private function onClickResume(pEvent:MouseEvent):void {
 			UIManager.getInstance().closeScreens();
 		}
 		
-		private function restart():void {
+		private function restart(pEvent:MouseEvent):void {
 			UIManager.getInstance().closeScreens();
 			GameManager.getInstance().restart();
 		}
 		
-		private function onClickMenu():void {
+		private function onClickMenu(pEvent:MouseEvent):void {
 			UIManager.getInstance().addScreen(TitleCard.getInstance());
+			//fonction reset du gamestage a faire
 		}
 		
 		/**
@@ -68,10 +72,6 @@ package com.monsterlab.ui {
 		 */
 		override public function destroy (): void {
 			instance = null;
-			btnResume.destroy();
-			//btnBack.destroy();
-			btnResume = null;
-			//btnBack = null;
 			super.destroy();
 		}
 

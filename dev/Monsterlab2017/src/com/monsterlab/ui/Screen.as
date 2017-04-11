@@ -12,6 +12,7 @@ package com.monsterlab.ui {
 		{
 			super();
 			addEventListener(Event.ADDED_TO_STAGE, init);
+			addListeners();
 
 		}
 		
@@ -23,6 +24,14 @@ package com.monsterlab.ui {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			Config.stage.addEventListener(Event.RESIZE, onResize);
 			onResize();
+		}
+		
+		protected function addListeners():void {
+			
+		}
+		
+		protected function removeListeners():void {
+			
 		}
 		
 		/**
@@ -37,6 +46,7 @@ package com.monsterlab.ui {
 		 * nettoie l'instance
 		 */
 		public function destroy (): void {
+			removeListeners();
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			Config.stage.removeEventListener(Event.RESIZE, onResize);
 		}
