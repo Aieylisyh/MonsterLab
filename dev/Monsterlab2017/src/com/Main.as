@@ -50,7 +50,7 @@ package com
 			//NativeApplication.nativeApplication.exit();
 		}
 		
-		public static function getInstance (): Main {
+		public static function getInstance (): Main { 
 			if (instance == null) instance = new Main();
 			return instance;
 		}
