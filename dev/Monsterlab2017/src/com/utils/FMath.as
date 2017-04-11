@@ -35,18 +35,16 @@ package com.utils
 			return result;
 		}
 		public static function valueByRotation(rotation:Number):Point {
-			//the origin image to be 0 degree and face upwards, if not ,you can plus some degree in your situation
+			//the origin image is supposed to be 0 degree and face upwards
 			var point:Point = new Point(0, 0);
 			point.x = Math.cos((rotation - 90)*DEG2RAD) ;
 			point.y = Math.sin((rotation - 90)*DEG2RAD) ;
 			return point;
 		}
 		public static function xFactorByRotation(lRotation:Number):Number {
-			//very simple function~
 			return Math.cos(lRotation*DEG2RAD);
 		}
 		public static function yFactorByRotation(lRotation:Number):Number {
-			//very simple function~
 			return Math.sin(lRotation*DEG2RAD);
 		}
 	}

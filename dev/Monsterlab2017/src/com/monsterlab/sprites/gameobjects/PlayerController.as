@@ -44,6 +44,7 @@ package com.monsterlab.sprites.gameobjects {
 		}
 		public function stop():void {
 			stop_mouse();
+		}
 		
 		private function start_mouse():void {
 			Config.stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
