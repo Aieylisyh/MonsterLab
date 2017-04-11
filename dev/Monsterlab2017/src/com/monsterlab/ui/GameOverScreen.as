@@ -11,6 +11,7 @@ package com.monsterlab.ui {
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.UIManager;
+	import flash.events.MouseEvent;
 	import flash.utils.getDefinitionByName; 
 	import flash.geom.Matrix;
 	
@@ -33,16 +34,7 @@ package com.monsterlab.ui {
 		{
 			super();
 			
-			//mcScore.txtScore.text = Hud.getInstance().mcTopCenter.txtScore.text;
-			
-			//btnRetry = new Button("BtnRestart", GameManager.getInstance().restart, 0, 90);
-			addChild(btnRetry);
-			
-			//A changer par un bouton menu
-			//btnMenu = new Button("BtnQuit", Main.getInstance().exit, 0, 200);
-			addChild(btnMenu);
-			
-			//Changer juste le Win par GameOver
+			/*Exemple pour du bitmap
 			//create just a "you win" image, but use bitmap to save memory, so it is very long
 			var myBitmapData:BitmapData;
 			var w:Number;
@@ -58,6 +50,8 @@ package com.monsterlab.ui {
 			bmp.x = -w * 0.5;
 			bmp.y = -h * 0.5-60;
 			addChild(bmp);
+			*/
+			
 		}
 		
 		public static function getInstance (): GameOverScreen {
@@ -65,24 +59,22 @@ package com.monsterlab.ui {
 			return instance;
 		}
 		
-		private function addListeners():void {
-			//btnPlay.addEventListener(MouseEvent.CLICK, startGame);
-			//btnOptions.addEventListener(MouseEvent.CLICK, startGame);
-			//btnCredits.addEventListener(MouseEvent.CLICK, startGame);
+		override protected function addListeners():void {
+			btnRetry.addEventListener(MouseEvent.CLICK, restart);
+			btnMenu.addEventListener(MouseEvent.CLICK, onClickMenu);
 		}
 		
-		private function removeListeners():void {
-			//btnPlay.removeEventListener(MouseEvent.CLICK, startGame);
-			//btnOptions.removeEventListener(MouseEvent.CLICK, startGame);
-			//btnCredits.removeEventListener(MouseEvent.CLICK, startGame);
+		override protected function removeListeners():void {
+			btnRetry.removeEventListener(MouseEvent.CLICK, restart);
+			btnMenu.removeEventListener(MouseEvent.CLICK, onClickMenu);
 		}
 		
-		private function restart():void {
+		private function restart(pEvent:MouseEvent):void {
 			UIManager.getInstance().closeScreens();
 			GameManager.getInstance().restart();
 		}
 		
-		private function onClickMenu():void {
+		private function onClickMenu(pEvent:MouseEvent):void {
 			UIManager.getInstance().addScreen(TitleCard.getInstance());
 		}
 		
@@ -90,19 +82,14 @@ package com.monsterlab.ui {
 		 * détruit l'instance unique et met sa référence interne à null
 		 */
 		override public function destroy (): void {
-			removeChild(bmp);
+			//removeChild(bmp);
 			bmp = null;
-			instance = null;
-			//btnRetry.destroy();
-			btnRetry = null;
-			//btnMenu.destroy();
-			btnMenu = null;
 			super.destroy();
 		}
 		
-		override protected function onResize (pEvent:Event=null): void {	
+		/*override protected function onResize (pEvent:Event=null): void {	
 			UIManager.getInstance().setPosition(mcBackground, UIPosition.FIT_SCREEN);
-		}
+		}*/
 
 	}
 }

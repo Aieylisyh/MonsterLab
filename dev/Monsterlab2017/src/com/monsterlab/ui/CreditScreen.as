@@ -7,6 +7,7 @@ package com.monsterlab.ui {
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.UIManager;
+	import flash.events.MouseEvent;
 	
 	public class CreditScreen extends Screen 
 	{
@@ -23,9 +24,6 @@ package com.monsterlab.ui {
 		public function CreditScreen() 
 		{
 			super();
-			//btnBack = new Button("", startGame, 0, 40);
-			//addChild(btnBack);
-
 		}
 		
 		public static function getInstance (): CreditScreen {
@@ -33,19 +31,15 @@ package com.monsterlab.ui {
 			return instance;
 		}
 		
-		private function addListeners():void {
-			//btnPlay.addEventListener(MouseEvent.CLICK, startGame);
-			//btnOptions.addEventListener(MouseEvent.CLICK, startGame);
-			//btnCredits.addEventListener(MouseEvent.CLICK, startGame);
+		override protected function addListeners():void {
+			btnBack.addEventListener(MouseEvent.CLICK, onClickBack);
 		}
 		
-		private function removeListeners():void {
-			//btnPlay.removeEventListener(MouseEvent.CLICK, startGame);
-			//btnOptions.removeEventListener(MouseEvent.CLICK, startGame);
-			//btnCredits.removeEventListener(MouseEvent.CLICK, startGame);
+		override protected function removeListeners():void {
+			btnBack.removeEventListener(MouseEvent.CLICK, onClickBack);
 		}
 		
-		private function onClickBack():void {
+		private function onClickBack(pEvent:MouseEvent):void {
 			UIManager.getInstance().addScreen(TitleCard.getInstance());
 		}
 		
@@ -55,8 +49,6 @@ package com.monsterlab.ui {
 		 */
 		override public function destroy (): void {
 			instance = null;
-			//btnBack.destroy();
-			//btnBack = null;
 			super.destroy();
 		}
 

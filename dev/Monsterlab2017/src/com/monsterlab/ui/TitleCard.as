@@ -17,14 +17,18 @@ package com.monsterlab.ui {
 		protected static var instance: TitleCard;
 
 		
-		public var mcBackground:Sprite;
+		//public var mcBackground:Sprite;
 		public var btnPlay:SimpleButton;
-		public var btnOptions:SimpleButton;
-		public var btnCredits:SimpleButton;
+		public var btnOption:SimpleButton;
+		public var btnCredit:SimpleButton;
 
 		public function TitleCard() 
 		{
 			super();
+		}
+		
+		public function initBtn():void {
+			addListeners();	
 		}
 		
 		public static function getInstance (): TitleCard {
@@ -32,28 +36,29 @@ package com.monsterlab.ui {
 			return instance;
 		}
 		
-		private function addListeners():void {
+		override protected function addListeners():void {
 			btnPlay.addEventListener(MouseEvent.CLICK, startGame);
-			//btnOptions.addEventListener(MouseEvent.CLICK, startGame);
-			//btnCredits.addEventListener(MouseEvent.CLICK, startGame);
+			btnOption.addEventListener(MouseEvent.CLICK, onClickOption);
+			btnCredit.addEventListener(MouseEvent.CLICK, onClickCredit);
 		}
 		
-		private function removeListeners():void {
+		override protected function removeListeners():void {
 			btnPlay.removeEventListener(MouseEvent.CLICK, startGame);
-			//btnOptions.removeEventListener(MouseEvent.CLICK, startGame);
-			//btnCredits.removeEventListener(MouseEvent.CLICK, startGame);
+			btnOption.removeEventListener(MouseEvent.CLICK, onClickOption);
+			btnCredit.removeEventListener(MouseEvent.CLICK, onClickCredit);
 		}
 		
-		private function startGame():void {
+		private function startGame(pEvent:MouseEvent):void {
+			trace("patate");
 			GameManager.getInstance().startGame();
 		}
 		
-		private function onClickOptions():void {
+		private function onClickOption(pEvent:MouseEvent):void {
 			OptionScreen.wasTitleCard = true;
 			UIManager.getInstance().addScreen(OptionScreen.getInstance());
 		}
 		
-		private function onClickCredits():void {
+		private function onClickCredit(pEvent:MouseEvent):void {
 			UIManager.getInstance().addScreen(CreditScreen.getInstance());
 		}
 		
@@ -61,13 +66,7 @@ package com.monsterlab.ui {
 		 * détruit l'instance unique et met sa référence interne à null
 		 */
 		override public function destroy (): void {
-			instance = null;
-			//btnPlay.destroy();
-			//btnOptions.destroy();
-			//btnCredits.destroy();
-			//btnPlay = null;
-			//btnOptions = null;
-			//btnCredits = null;
+			instance = null;			
 			super.destroy();
 		}
 
