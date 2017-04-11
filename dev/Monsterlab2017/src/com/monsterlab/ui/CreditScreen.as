@@ -15,6 +15,8 @@ package com.monsterlab.ui {
 		 */
 		protected static var instance: CreditScreen;
 
+		
+		public var mcBackground:Sprite;
 		public var btnBack:Button;
 
 		public function CreditScreen() 

@@ -24,7 +24,7 @@ package com.monsterlab.ui {
 		
 		protected var bmp:Bitmap;
 		public var btnRetry:Button;
-		public var btnExit:Button;
+		public var btnMenu:Button;
 		public var mcBackground:Sprite;
 		public var mcScore:MovieClip;
 		
@@ -38,8 +38,8 @@ package com.monsterlab.ui {
 			addChild(btnRetry);
 			
 			//A changer par un bouton menu
-			btnExit = new Button("BtnQuit", Main.getInstance().exit, 0, 200);
-			addChild(btnExit);
+			btnMenu = new Button("BtnQuit", Main.getInstance().exit, 0, 200);
+			addChild(btnMenu);
 			
 			//Changer juste le Win par GameOver
 			//create just a "you win" image, but use bitmap to save memory, so it is very long
@@ -82,8 +82,8 @@ package com.monsterlab.ui {
 			instance = null;
 			btnRetry.destroy();
 			btnRetry = null;
-			btnExit.destroy();
-			btnExit = null;
+			btnMenu.destroy();
+			btnMenu = null;
 			super.destroy();
 		}
 		

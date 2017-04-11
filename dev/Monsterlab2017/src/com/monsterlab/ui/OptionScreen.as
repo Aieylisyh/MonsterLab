@@ -16,7 +16,9 @@ package com.monsterlab.ui {
 		protected static var instance: OptionScreen;
 		
 		public static var wasTitleCard: Boolean;
-
+		
+		
+		public var mcBackground:Sprite;
 		public var btnSound:Button;
 		public var btnBack:Button;
 

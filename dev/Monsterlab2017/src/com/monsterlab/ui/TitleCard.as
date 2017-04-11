@@ -14,6 +14,8 @@ package com.monsterlab.ui {
 		 */
 		protected static var instance: TitleCard;
 
+		
+		public var mcBackground:Sprite;
 		public var btnPlay:Button;
 		public var btnOptions:Button;
 		public var btnCredits:Button;
