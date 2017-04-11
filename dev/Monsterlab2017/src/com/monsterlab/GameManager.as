@@ -2,8 +2,8 @@ package com.monsterlab
 {
 	import com.monsterlab.sprites.gameobjects.Button;
 	import com.monsterlab.sprites.gameobjects.Player;
-	import com.monsterlab.ui.MenuPage;
-	import com.monsterlab.ui.RestartPage;
+	import com.monsterlab.ui.TitleCard;
+	import com.monsterlab.ui.GameOverScreen;
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
 	import com.monsterlab.sprites.gameobjects.Effect;
@@ -23,7 +23,7 @@ package com.monsterlab
 		public function init():void {
 			//for first run this game
 			trace("GameManager is running fine");
-			UIManager.getInstance().addScreen(MenuPage.getInstance());
+			UIManager.getInstance().addScreen(TitleCard.getInstance());
 		}
 		
 		
@@ -109,7 +109,7 @@ package com.monsterlab
 				obj.destroy();
 			}
 			
-			UIManager.getInstance().addScreen(RestartPage.getInstance());
+			UIManager.getInstance().addScreen(GameOverScreen.getInstance());
 		}
 	}
 

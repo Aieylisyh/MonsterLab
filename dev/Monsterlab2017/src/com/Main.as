@@ -45,6 +45,7 @@ package com
 			//make sure the app behaves well (or exits) when in background
 			//NativeApplication.nativeApplication.exit();
 		}
+		
 		public function exit():void 
 		{
 			//NativeApplication.nativeApplication.exit();

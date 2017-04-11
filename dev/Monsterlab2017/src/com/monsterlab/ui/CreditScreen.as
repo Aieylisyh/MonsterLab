@@ -6,41 +6,42 @@ package com.monsterlab.ui {
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.UIManager;
-	public class MenuPage extends Screen 
+	
+	public class CreditScreen extends Screen 
 	{
 		
 		/**
 		 * instance unique de la classe GraphicLoader
 		 */
-		protected static var instance: MenuPage;
+		protected static var instance: CreditScreen;
 
-		public var btn:Button;
+		public var btnBack:Button;
 
-		public function MenuPage() 
+		public function CreditScreen() 
 		{
 			super();
-
-			btn = new Button("Btn4", startGame, 0, 40);
-
-			addChild(btn);
+			//btnBack = new Button("", startGame, 0, 40);
+			//addChild(btnBack);
 
 		}
 		
-		public static function getInstance (): MenuPage {
-			if (instance == null) instance = new MenuPage();
+		public static function getInstance (): CreditScreen {
+			if (instance == null) instance = new CreditScreen();
 			return instance;
 		}
 		
-		private function startGame():void {
-			GameManager.getInstance().startGame();
+		private function onClickBack():void {
+			UIManager.getInstance().addScreen(TitleCard.getInstance());
 		}
+		
+		
 		/**
 		 * détruit l'instance unique et met sa référence interne à null
 		 */
 		override public function destroy (): void {
 			instance = null;
-			btn.destroy();
-			btn = null;
+			//btnBack.destroy();
+			//btnBack = null;
 			super.destroy();
 		}
 

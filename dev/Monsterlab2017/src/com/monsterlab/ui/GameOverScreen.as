@@ -5,6 +5,7 @@ package com.monsterlab.ui {
 	import com.monsterlab.ui.Screen;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import com.monsterlab.GameStage;
@@ -13,27 +14,34 @@ package com.monsterlab.ui {
 	import flash.geom.Matrix;
 	
 	
-	public class RestartPage extends Screen 
+	public class GameOverScreen extends Screen 
 	{
 		
 		/**
-		 * instance unique de la classe GraphicLoader
+		 * instance unique de la classe GameOver
 		 */
-		protected static var instance: RestartPage;
+		protected static var instance: GameOverScreen;
+		
 		protected var bmp:Bitmap;
-		public var btn:Button;
-		public var btn2:Button;
-		public function RestartPage() 
+		public var btnRetry:Button;
+		public var btnExit:Button;
+		public var mcBackground:Sprite;
+		public var mcScore:MovieClip;
+		
+		public function GameOverScreen() 
 		{
 			super();
 			
-			btn = new Button("BtnRestart", GameManager.getInstance().restart, 0, 90);
-			addChild(btn);
+			//mcScore.txtScore.text = Hud.getInstance().mcTopCenter.txtScore.text;
 			
-			btn2 = new Button("BtnQuit", Main.getInstance().exit, 0, 200);
-			addChild(btn2);
+			btnRetry = new Button("BtnRestart", GameManager.getInstance().restart, 0, 90);
+			addChild(btnRetry);
 			
+			//A changer par un bouton menu
+			btnExit = new Button("BtnQuit", Main.getInstance().exit, 0, 200);
+			addChild(btnExit);
 			
+			//Changer juste le Win par GameOver
 			//create just a "you win" image, but use bitmap to save memory, so it is very long
 			var myBitmapData:BitmapData;
 			var w:Number;
@@ -51,10 +59,20 @@ package com.monsterlab.ui {
 			addChild(bmp);
 		}
 		
-		public static function getInstance (): RestartPage {
-			if (instance == null) instance = new RestartPage();
+		public static function getInstance (): GameOverScreen {
+			if (instance == null) instance = new GameOverScreen();
 			return instance;
 		}
+		
+		private function restart():void {
+			UIManager.getInstance().closeScreens();
+			GameManager.getInstance().restart();
+		}
+		
+		private function onClickMenu():void {
+			UIManager.getInstance().addScreen(TitleCard.getInstance());
+		}
+		
 		/**
 		 * détruit l'instance unique et met sa référence interne à null
 		 */
@@ -62,11 +80,15 @@ package com.monsterlab.ui {
 			removeChild(bmp);
 			bmp = null;
 			instance = null;
-			btn.destroy();
-			btn = null;
-			btn2.destroy();
-			btn2 = null;
+			btnRetry.destroy();
+			btnRetry = null;
+			btnExit.destroy();
+			btnExit = null;
 			super.destroy();
+		}
+		
+		override protected function onResize (pEvent:Event=null): void {	
+			UIManager.getInstance().setPosition(mcBackground, UIPosition.FIT_SCREEN);
 		}
 
 	}
