@@ -1,14 +1,12 @@
 package com.monsterlab {
 	
 	import com.Main;
-	import com.monsterlab.game.gameobjects.sprites.Button;
-	import com.monsterlab.ui.screens.Hud;
-	import com.monsterlab.ui.screens.PauseScreen;
-	import com.monsterlab.ui.UIManager;
+	import com.monsterlab.sprites.gameobjects.Button;
 	import com.utils.Config;
 	import flash.display.Sprite;
 	import flash.events.Event;
-
+	import flash.geom.Point;
+	import flash.text.TextField;
 	public class GameStage extends Sprite 
 	{
 		
@@ -20,16 +18,16 @@ package com.monsterlab {
 		/**
 		 * largeur minimum pour le contenu visible
 		 */
-		public static const SAFE_ZONE_WIDTH: int = 720;
+		public static const SAFE_ZONE_WIDTH: int = 1366;
 
 		/**
 		 * hauteur minimum pour le contenu visible
 		 */
-		public static const SAFE_ZONE_HEIGHT: int = 1366;
+		public static const SAFE_ZONE_HEIGHT: int = 2048;
 		
 		
-		public static const MID_H: int = 360;
-		public static const MID_V: int = 683;
+		public static const MID_H: int = 683;
+		public static const MID_V: int = 1024;
 		/**
 		 * conteneur des pop-in
 		 */
@@ -69,14 +67,9 @@ package com.monsterlab {
 		}
 		public function addInterFace():void {
 			var btnQuit:Button;
-			btnQuit = new Button("BtnQuit", testPause, 0,48,true);
+			btnQuit = new Button("BtnQuit", Main.getInstance().exit, 0,48,true);
 			hudContainer.addChild(btnQuit);
 		}
-		
-		private function testPause():void {
-			UIManager.getInstance().addScreen(PauseScreen.getInstance());
-		}
-		
 		public function init (pCallBack:Function): void {
 			
 			gameContainer = new Sprite();
@@ -91,23 +84,19 @@ package com.monsterlab {
 			gameContainer.addChild(gameLayer_3);
 			gameContainer.addChild(gameLayer_4);
 			gameContainer.addChild(gameLayer_5);
-			
-			
-			
-			
 			screensContainer = new Sprite();
 			addChild(screensContainer);//screen
 			screensContainer.x = MID_H;
 			screensContainer.y = MID_V;
 			
+			hudContainer = new Sprite();//hud
+			addChild(hudContainer);
+			
 			popinContainer = new Sprite();//popin maybe never used
 			addChild(popinContainer);
 			popinContainer.x = MID_H;
 			popinContainer.y = MID_V;
-			hudContainer = new Sprite();//hud
-			addChild(hudContainer);
-			hudContainer.x = MID_H;
-			hudContainer.y = MID_V;
+			
 			Config.stage.addEventListener(Event.RESIZE, resize);
 			resize();
 			
@@ -127,9 +116,7 @@ package com.monsterlab {
 			
 			x = (Config.stage.stageWidth-SAFE_ZONE_WIDTH*scaleX) * 0.5;
 			y = (Config.stage.stageHeight - SAFE_ZONE_HEIGHT * scaleY) * 0.5;
-			
 		}
-		
 		/**
 		 * accès en lecture au conteneur de jeu
 		 * @return gameContainer
@@ -153,10 +140,12 @@ package com.monsterlab {
 			return gameLayer_5;
 		}
 		
-		public function initHud():void {
-			hudContainer.addChild(Hud.getInstance());
+		public function stagePointToScreenPoint (p:Point): Point {
+			var point:Point = new Point(p.x, p.y);
+			point.x = p.x / this.scaleX - this.x / this.scaleX;
+			point.y = p.y / this.scaleY - this.y / this.scaleY;
+			return point;
 		}
-
 		/**
 		 * accès en lecture au conteneur d'écrans
 		 * @return screensContainer
