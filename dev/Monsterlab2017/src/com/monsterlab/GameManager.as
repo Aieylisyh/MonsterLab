@@ -2,6 +2,7 @@ package com.monsterlab
 {
 	import com.monsterlab.game.gameobjects.GameObject;
 	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.game.gameobjects.sprites.Mixer;
 	import com.monsterlab.game.gameobjects.sprites.Player;
 	import com.monsterlab.ui.screens.Hud;
 	import com.monsterlab.ui.screens.TitleCard;
@@ -35,27 +36,17 @@ package com.monsterlab
 		public function startGame():void {
 			trace("GameManager startGame is running fine");
 			UIManager.getInstance().closeScreens();
-			GameStage.getInstance().addInterFace();
-			GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
+			//GameStage.getInstance().addInterFace();
+			
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
-			//btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V, false);
-			//GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
-			var myText:TextField = new TextField();
+			/*var myText:TextField = new TextField();
 			myText.text = "coucou";
 			//GameStage.getInstance().getHudContainer().addChild(myText);
 			myText.x = 150;
 			myText.y = 50;
-			Hud.getInstance().addChild(myText);
-			GameStage.getInstance().getHudContainer().addChild(Hud.getInstance());
-			myText.text = "hello";	
-			
-			//var lHudContainer:Sprite = GameStage.getInstance().getHudContainer();
-					
-			//GameStage.getInstance().getHudContainer().addChild(myText);
-			//lHudContainer.addChild(Hud.getInstance());
-			
-			
-			//UIManager.getInstance().addScreen(Hud.getInstance());
+			Hud.getInstance().addChild(myText);*/
+			GameStage.getInstance().getGameContainer_5().addChild(Hud.getInstance());
+			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
 		}
 		
 		private var i:int = 0;
@@ -119,7 +110,14 @@ package com.monsterlab
 		}
 		
 		public function restart():void {
+			reset();
 			startGame();
+		}
+		
+		public function reset():void {
+			GameStage.getInstance().getGameContainer_5().removeChild(Mixer.getInstance());
+			GameStage.getInstance().removeEventListener(Event.ENTER_FRAME, gameLoop);
+			GameStage.getInstance().getGameContainer_5().removeChild(Hud.getInstance());
 		}
 		
 		private function gameover():void {
