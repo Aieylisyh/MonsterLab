@@ -1,26 +1,27 @@
 package com.monsterlab.ui.screens 
-{	
+{
 	import com.monsterlab.ui.Screen;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
+	
 	/**
 	 * ...
-	 * @author COQUERELLE Killian
+	 * @author Adridro
 	 */
 	public class Hud extends Screen 
 	{
+	
+		public var btnPause:SimpleButton;
+		public var Recipe0:MovieClip;
+		public var Recipe1:MovieClip;
+		public var Recipe2:MovieClip;
+		public var Recipe3:MovieClip;
+		public var mcRecipe:MovieClip;
 		
 		/**
 		 * instance unique de la classe Hud
 		 */
 		protected static var instance: Hud;
-		
-		private var mcTimer:MovieClip;
-		private var mcHudPart:MovieClip;
-		private var mcScore:MovieClip;
-		private var mcConveyor:MovieClip;
-		private var btnPause:SimpleButton;
-		private var mcRecipe:MovieClip;
 
 		/**
 		 * Retourne l'instance unique de la classe, et la crée si elle n'existait pas au préalable
@@ -42,7 +43,6 @@ package com.monsterlab.ui.screens
 		 */
 		override public function destroy (): void {
 			instance = null;
-			super.destroy()
 		}
 
 	}
