@@ -1,5 +1,5 @@
-package com.monsterlab.sprites.gameobjects {
-import com.monsterlab.GameObject;
+package com.monsterlab.game.gameobjects.sprites {
+import com.monsterlab.game.gameobjects.GameObject;
 import com.monsterlab.GameStage;
 import com.utils.FMath;
 import com.utils.SoundManager;

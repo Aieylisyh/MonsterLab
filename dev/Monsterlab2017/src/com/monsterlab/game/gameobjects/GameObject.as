@@ -1,4 +1,4 @@
-package com.monsterlab
+package com.monsterlab.game.gameobjects
 {
 	import flash.display.Sprite;
 	import flash.geom.Matrix;

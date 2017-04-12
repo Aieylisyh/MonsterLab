@@ -1,9 +1,9 @@
-package com.monsterlab.sprites.gameobjects {
+package com.monsterlab.game.gameobjects.sprites {
 	import flash.display.DisplayObject;
     import flash.display.Sprite;
 	import flash.events.MouseEvent;
     import flash.utils.getDefinitionByName;
-	import com.monsterlab.GameObject
+	import com.monsterlab.game.gameobjects.GameObject
 	public class Button extends GameObject
 	{
 		private var clickFunction:Function = null;

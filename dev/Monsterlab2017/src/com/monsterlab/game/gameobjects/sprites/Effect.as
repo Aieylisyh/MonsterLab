@@ -1,5 +1,5 @@
-package com.monsterlab.sprites.gameobjects {
-	import com.monsterlab.GameObject;
+package com.monsterlab.game.gameobjects.sprites {
+	import com.monsterlab.game.gameobjects.GameObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.geom.Matrix;

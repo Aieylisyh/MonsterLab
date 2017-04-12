@@ -1,7 +1,8 @@
-package com.monsterlab.ui {
+package com.monsterlab.ui.screens {
 	import com.monsterlab.GameManager;
-	import com.monsterlab.sprites.gameobjects.Button;
+	import com.monsterlab.game.gameobjects.sprites.Button;
 	import com.monsterlab.ui.Screen;
+	import com.monsterlab.ui.screens.OptionScreen;
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;

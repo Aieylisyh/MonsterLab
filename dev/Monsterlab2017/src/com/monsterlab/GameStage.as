@@ -1,8 +1,8 @@
 package com.monsterlab {
 	
 	import com.Main;
-	import com.monsterlab.sprites.gameobjects.Button;
-	import com.monsterlab.ui.PauseScreen;
+	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.ui.screens.PauseScreen;
 	import com.monsterlab.ui.UIManager;
 	import com.utils.Config;
 	import flash.display.Sprite;
@@ -90,13 +90,15 @@ package com.monsterlab {
 			gameContainer.addChild(gameLayer_3);
 			gameContainer.addChild(gameLayer_4);
 			gameContainer.addChild(gameLayer_5);
+			
+			
+			hudContainer = new Sprite();//hud
+			addChild(hudContainer);
+			
 			screensContainer = new Sprite();
 			addChild(screensContainer);//screen
 			screensContainer.x = MID_H;
 			screensContainer.y = MID_V;
-			
-			hudContainer = new Sprite();//hud
-			addChild(hudContainer);
 			
 			popinContainer = new Sprite();//popin maybe never used
 			addChild(popinContainer);

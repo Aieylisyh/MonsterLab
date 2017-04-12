@@ -1,4 +1,4 @@
-package com.monsterlab.sprites.gameobjects {
+package com.monsterlab.game.gameobjects.sprites {
 	import com.utils.Config;
 	import com.utils.FMath;
 	import flash.events.MouseEvent;

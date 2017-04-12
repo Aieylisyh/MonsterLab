@@ -1,12 +1,13 @@
 package com.monsterlab 
 {
-	import com.monsterlab.sprites.gameobjects.Button;
-	import com.monsterlab.sprites.gameobjects.Player;
-	import com.monsterlab.ui.TitleCard;
-	import com.monsterlab.ui.GameOverScreen;
+	import com.monsterlab.game.gameobjects.GameObject;
+	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.game.gameobjects.sprites.Player;
+	import com.monsterlab.ui.screens.TitleCard;
+	import com.monsterlab.ui.screens.GameOverScreen;
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
-	import com.monsterlab.sprites.gameobjects.Effect;
+	import com.monsterlab.game.gameobjects.sprites.Effect;
 	public class GameManager 
 	{
 		protected static var instance: GameManager;

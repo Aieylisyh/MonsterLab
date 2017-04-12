@@ -1,4 +1,5 @@
-package com.monsterlab {
+package com.monsterlab.game.gameobjects {
+	import com.monsterlab.game.gameobjects.GameObject;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
