@@ -8,7 +8,7 @@ package com.monsterlab {
 	import com.utils.Config;
 	import flash.display.Sprite;
 	import flash.events.Event;
-
+	import flash.geom.Point;
 	public class GameStage extends Sprite 
 	{
 		
@@ -152,6 +152,13 @@ package com.monsterlab {
 		}
 		public function getGameContainer_5 (): Sprite {
 			return gameLayer_5;
+		}
+		
+		public function stagePointToScreenPoint (p:Point): Point {
+			var point:Point = new Point(p.x, p.y);
+			point.x = p.x / this.scaleX - this.x / this.scaleX;
+			point.y = p.y / this.scaleY - this.y / this.scaleY;
+			return point;
 		}
 		
 		public function initHud():void {
