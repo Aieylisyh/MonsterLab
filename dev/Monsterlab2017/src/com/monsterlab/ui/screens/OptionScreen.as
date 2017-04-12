@@ -26,6 +26,7 @@ package com.monsterlab.ui.screens {
 		public var mcHighScore:MovieClip;
 		public var btnVolume:SimpleButton;
 		public var btnBack:SimpleButton;
+		public var btnScore:SimpleButton;
 
 		public function OptionScreen() 
 		{

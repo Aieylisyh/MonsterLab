@@ -1,0 +1,47 @@
+<xliff version="1.2">
+	<file original="" source-language="en-US" target-language="fr-FR">
+		<header></header>
+		<body>
+			<trans-unit id="1">
+				<source>SCORE</source>
+				<target>SCORE</target>
+			</trans-unit>
+			<trans-unit id="2">
+				<source>PLAY</source>
+				<target>JOUER</target>
+			</trans-unit>
+			<trans-unit id="3">
+				<source>OPTION</source>
+				<target>OPTION</target>
+			</trans-unit>
+			<trans-unit id="4">
+				<source>CREDIT</source>
+				<target>CREDIT</target>
+			</trans-unit>
+			<trans-unit id="5">
+				<source>BACK</source>
+				<target>RETOUR</target>
+			</trans-unit>
+			<trans-unit id="6">
+				<source>MENU</source>
+				<target>MENU</target>
+			</trans-unit>
+			<trans-unit id="7">
+				<source>PAUSE</source>
+				<target>PAUSE</target>
+			</trans-unit>
+			<trans-unit id="8">
+				<source>RESUME</source>
+				<target>REPRENDRE</target>
+			</trans-unit>
+			<trans-unit id="9">
+				<source>RETRY</source>
+				<target>RECOMMENCER</target>
+			</trans-unit>
+			<trans-unit id="10">
+				<source>VOLUME</source>
+				<target>VOLUME</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

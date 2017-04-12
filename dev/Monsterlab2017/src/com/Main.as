@@ -6,6 +6,7 @@ package com
 	import com.monsterlab.ui.GraphicLoader;
 	import com.monsterlab.ui.UIManager;
 	import com.monsterlab.ui.GraphicLoader;
+	import com.utils.text.LocalizedTextField;
 	//import flash.desktop.NativeApplication;
 	import flash.events.Event;
 	import flash.display.Sprite;
@@ -94,7 +95,7 @@ package com
 		protected function loadAssets (): void {
 			
 			var lLoader:AssetsLoader = new AssetsLoader ();
-			//lLoader.addTxtFile(Config.langPath + Config.language+"/main.xlf");
+			lLoader.addTxtFile(Config.langPath + Config.language+"/main.xlf");
 			//lLoader.addTxtFile("sound.xml");
 			lLoader.addDisplayFile("assets.swf");
 			lLoader.addDisplayFile("ui.swf");
@@ -117,7 +118,7 @@ package com
 			pEvent.target.removeEventListener(AssetsLoaderEvent.PROGRESS, onLoadProgress);
 			pEvent.target.removeEventListener(AssetsLoaderEvent.COMPLETE, onLoadComplete);
 			
-			//LocalizedTextField.init(String(AssetsLoader.getContent(Config.langPath + Config.language+"/main.xlf")));
+			LocalizedTextField.init(String(AssetsLoader.getContent(Config.langPath + Config.language+"/main.xlf")));
 			
 			//UIManager.getInstance().addScreen(TitleCard.getInstance());
 			trace("onLoadComplete");
