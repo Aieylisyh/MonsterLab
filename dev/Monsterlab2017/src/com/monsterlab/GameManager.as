@@ -10,6 +10,7 @@ package com.monsterlab
 	import com.monsterlab.ui.screens.GameOverScreen;
 	import com.monsterlab.ui.screens.TitleCard;
 	import com.utils.SoundManager;
+	import com.monsterlab.ui.screens.Hud;
 	public class GameManager 
 	{
 		protected static var instance: GameManager;
@@ -42,6 +43,8 @@ package com.monsterlab
 			//GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
 			GameStage.getInstance().getGameContainer_2().addChild(Mixer.getInstance());
 			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
+			GameStage.getInstance().getGameContainer_5().addChild(Hud.getInstance());
+			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
 		}
 		
 		private var i:int = 0;
@@ -131,6 +134,12 @@ package com.monsterlab
 		public function onResume():void {
 			if (isPaused)
 				isPaused = false;
+		}
+		
+		public function reset():void {
+			GameStage.getInstance().getGameContainer_5().removeChild(Mixer.getInstance());
+			GameStage.getInstance().removeEventListener(Event.ENTER_FRAME, gameLoop);
+			GameStage.getInstance().getGameContainer_5().removeChild(Hud.getInstance());
 		}
 		
 		private function gameover():void {

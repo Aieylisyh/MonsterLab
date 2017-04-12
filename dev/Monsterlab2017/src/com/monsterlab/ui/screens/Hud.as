@@ -1,8 +1,12 @@
 package com.monsterlab.ui.screens 
 {
+	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.Screen;
+	import com.monsterlab.ui.UIManager;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
+	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	/**
 	 * ...
@@ -35,7 +39,25 @@ package com.monsterlab.ui.screens
 		public function Hud() 
 		{
 			super();
-			
+			x = GameStage.MID_H;
+			y = GameStage.MID_V;
+		}
+		
+		override protected function addListeners():void 
+		{
+			super.addListeners();
+			btnPause.addEventListener(MouseEvent.CLICK, onClickPause);
+		}
+		
+		override protected function removeListeners():void 
+		{
+			super.removeListeners();
+			btnPause.removeEventListener(MouseEvent.CLICK, onClickPause);
+		}
+		
+		private function onClickPause(pEvent:MouseEvent):void {
+			//GameManger.getInstance().onPause();
+			UIManager.getInstance().addScreen(PauseScreen.getInstance());
 		}
 		
 		/**
