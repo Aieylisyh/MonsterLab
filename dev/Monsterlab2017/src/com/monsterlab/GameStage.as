@@ -76,6 +76,7 @@ package com.monsterlab {
 		
 		private function testPause():void {
 			UIManager.getInstance().addScreen(PauseScreen.getInstance());
+			GameManager.getInstance().onPause();
 		}
 		
 		public function init (pCallBack:Function): void {

@@ -9,13 +9,14 @@ package com.monsterlab
 	import com.monsterlab.game.gameobjects.GameObject;
 	import com.monsterlab.ui.screens.GameOverScreen;
 	import com.monsterlab.ui.screens.TitleCard;
+	import com.utils.SoundManager;
 	public class GameManager 
 	{
 		protected static var instance: GameManager;
 		public var btnTestAnim:Button;
+		private var isPaused:Boolean;
 		public function GameManager() 
 		{
-			
 		}
 		public static function getInstance (): GameManager {
 			if (instance == null) instance = new GameManager();
@@ -31,21 +32,24 @@ package com.monsterlab
 		
 		
 		public function startGame():void {
+			isPaused = false;
 			trace("GameManager startGame is running fine");
 			UIManager.getInstance().closeScreens();
 			GameStage.getInstance().addInterFace();
 			//GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
-			//btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V*0.8, false);
+			btnTestAnim = new Button("Btn4", test, 10, GameStage.MID_V*0.8, false);
 			//GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
 			GameStage.getInstance().getGameContainer_2().addChild(Mixer.getInstance());
+			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
 		}
 		
 		private var i:int = 0;
 		private var effs:Vector.<Effect> = new Vector.<Effect>();
 		private function gameLoop(_:Event):void {
-			
 			defaultLoop();
+			if (isPaused)
+				return;
 			for (var i:int = GameObject.list.length - 1; i > -1; i-- ) {
 				var obj:* = GameObject.list[i];
 				if (obj.willBeDestroyed) {
@@ -59,6 +63,19 @@ package com.monsterlab
 		private function test(_:Event=null):void {
 			if (i > 3) {
 				i = 0;
+				//SoundManager.getInstance().startNewBackgroundMusic("sound_type");
+			}
+			if (i ==0) {
+				SoundManager.getInstance().makeSound ("sound_mixer");
+			}
+			if (i ==1) {
+				SoundManager.getInstance().setSoundVol (0,0.6);
+			}
+			if (i ==2) {
+				SoundManager.getInstance().setSoundVol (0,0.3);
+			}
+			if (i ==2) {
+				SoundManager.getInstance().stopSound(0);
 			}
 			for each(var pEff:Effect in effs) {
 				if (pEff != null)
@@ -99,10 +116,21 @@ package com.monsterlab
 		}
 		
 		private function defaultLoop():void {
+			//execute even when pause
 		}
 		
 		public function restart():void {
 			startGame();
+		}
+		
+		public function onPause():void {
+			if (!isPaused)
+				isPaused = true;
+		}
+		
+		public function onResume():void {
+			if (isPaused)
+				isPaused = false;
 		}
 		
 		private function gameover():void {

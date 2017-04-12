@@ -56,6 +56,7 @@ package com.monsterlab.ui.screens {
 		
 		private function onClickResume(pEvent:MouseEvent):void {
 			UIManager.getInstance().closeScreens();
+			GameManager.getInstance().onResume();
 		}
 		
 		private function restart(pEvent:MouseEvent):void {
