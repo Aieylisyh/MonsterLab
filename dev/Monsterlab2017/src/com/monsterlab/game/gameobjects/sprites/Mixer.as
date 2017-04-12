@@ -31,7 +31,7 @@ package com.monsterlab.game.gameobjects.sprites
 			super();
 			generateGraphics("Player")
 			x = GameStage.MID_H;
-			y = GameStage.SAFE_ZONE_HEIGHT * 0.7;
+			y = GameStage.SAFE_ZONE_HEIGHT * 0.9;
 			controller = new MixerController(this);
 			controller.start();//receive event, can drag
 			start();

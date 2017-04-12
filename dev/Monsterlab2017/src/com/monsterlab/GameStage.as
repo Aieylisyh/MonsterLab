@@ -9,6 +9,7 @@ package com.monsterlab {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Point;
+
 	public class GameStage extends Sprite 
 	{
 		
@@ -68,14 +69,9 @@ package com.monsterlab {
 			return instance;
 		}
 		public function addInterFace():void {
-			var btnQuit:Button;
+			/*var btnQuit:Button;
 			btnQuit = new Button("BtnQuit", testPause, 0,48,true);
-			hudContainer.addChild(btnQuit);
-		}
-		
-		private function testPause():void {
-			UIManager.getInstance().addScreen(PauseScreen.getInstance());
-			GameManager.getInstance().onPause();
+			hudContainer.addChild(btnQuit);*/
 		}
 		
 		public function init (pCallBack:Function): void {
@@ -93,8 +89,10 @@ package com.monsterlab {
 			gameContainer.addChild(gameLayer_4);
 			gameContainer.addChild(gameLayer_5);
 			
-			
-			
+			hudContainer = new Sprite();//hud
+			addChild(hudContainer);
+			hudContainer.x = MID_H;
+			hudContainer.y = MID_V;
 			
 			screensContainer = new Sprite();
 			addChild(screensContainer);//screen
@@ -105,10 +103,7 @@ package com.monsterlab {
 			addChild(popinContainer);
 			popinContainer.x = MID_H;
 			popinContainer.y = MID_V;
-			hudContainer = new Sprite();//hud
-			addChild(hudContainer);
-			hudContainer.x = MID_H;
-			hudContainer.y = MID_V;
+			
 			Config.stage.addEventListener(Event.RESIZE, resize);
 			resize();
 			
@@ -159,10 +154,6 @@ package com.monsterlab {
 			point.x = p.x / this.scaleX - this.x / this.scaleX;
 			point.y = p.y / this.scaleY - this.y / this.scaleY;
 			return point;
-		}
-		
-		public function initHud():void {
-			hudContainer.addChild(Hud.getInstance());
 		}
 
 		/**
