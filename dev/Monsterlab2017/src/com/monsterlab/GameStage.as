@@ -18,16 +18,16 @@ package com.monsterlab {
 		/**
 		 * largeur minimum pour le contenu visible
 		 */
-		public static const SAFE_ZONE_WIDTH: int = 720;
+		public static const SAFE_ZONE_WIDTH: int = 1366;
 
 		/**
 		 * hauteur minimum pour le contenu visible
 		 */
-		public static const SAFE_ZONE_HEIGHT: int = 1366;
+		public static const SAFE_ZONE_HEIGHT: int = 2048;
 		
 		
-		public static const MID_H: int = 360;
-		public static const MID_V: int = 683;
+		public static const MID_H: int = 683;
+		public static const MID_V: int = 1024;
 		/**
 		 * conteneur des pop-in
 		 */

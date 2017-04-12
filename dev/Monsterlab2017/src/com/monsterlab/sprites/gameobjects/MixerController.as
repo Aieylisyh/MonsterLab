@@ -36,7 +36,7 @@ package com.monsterlab.sprites.gameobjects
 		protected var timer:int;
 		
 		public var isDraging:Boolean = false;
-		private var mixerRadius:Number  = 200;
+		private var mixerRadius:Number  = 250;
 		private var mixerDragFactor:Number  = 1;
 		//private var text1:TextField;
 		//private var text2:TextField;
