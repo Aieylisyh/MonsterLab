@@ -1,13 +1,14 @@
 package com.monsterlab 
 {
-	import com.monsterlab.sprites.gameobjects.Button;
-	import com.monsterlab.sprites.gameobjects.Player;
-	import com.monsterlab.ui.MenuPage;
-	import com.monsterlab.ui.RestartPage;
+	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.game.gameobjects.sprites.Player;
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
-	import com.monsterlab.sprites.gameobjects.Effect;
-	import com.monsterlab.sprites.gameobjects.Mixer;;
+	import com.monsterlab.game.gameobjects.sprites.Effect;
+	import com.monsterlab.game.gameobjects.sprites.Mixer;;
+	import com.monsterlab.game.gameobjects.GameObject;
+	import com.monsterlab.ui.screens.GameOverScreen;
+	import com.monsterlab.ui.screens.TitleCard;
 	public class GameManager 
 	{
 		protected static var instance: GameManager;
@@ -24,7 +25,7 @@ package com.monsterlab
 		public function init():void {
 			//for first run this game
 			trace("GameManager is running fine");
-			UIManager.getInstance().addScreen(MenuPage.getInstance());
+			UIManager.getInstance().addScreen(TitleCard.getInstance());
 		}
 		
 		
@@ -35,8 +36,8 @@ package com.monsterlab
 			GameStage.getInstance().addInterFace();
 			//GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
-			btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V*0.8, false);
-			GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
+			//btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V*0.8, false);
+			//GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
 			GameStage.getInstance().getGameContainer_2().addChild(Mixer.getInstance());
 		}
 		
@@ -111,7 +112,7 @@ package com.monsterlab
 				obj.destroy();
 			}
 			
-			UIManager.getInstance().addScreen(RestartPage.getInstance());
+			UIManager.getInstance().addScreen(GameOverScreen.getInstance());
 		}
 	}
 

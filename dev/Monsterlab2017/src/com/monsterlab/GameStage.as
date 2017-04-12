@@ -1,12 +1,14 @@
 package com.monsterlab {
 	
 	import com.Main;
-	import com.monsterlab.sprites.gameobjects.Button;
+	import com.monsterlab.game.gameobjects.sprites.Button;
 	import com.utils.Config;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.text.TextField;
+	import com.monsterlab.ui.UIManager;
+	import com.monsterlab.ui.screens.PauseScreen;
 	public class GameStage extends Sprite 
 	{
 		
@@ -67,9 +69,15 @@ package com.monsterlab {
 		}
 		public function addInterFace():void {
 			var btnQuit:Button;
-			btnQuit = new Button("BtnQuit", Main.getInstance().exit, 0,48,true);
+			//btnQuit = new Button("BtnQuit", Main.getInstance().exit, 0,48,true);
+			btnQuit = new Button("BtnQuit", testPause, 0,48,true);
 			hudContainer.addChild(btnQuit);
 		}
+		
+		private function testPause():void {
+			UIManager.getInstance().addScreen(PauseScreen.getInstance());
+		}
+		
 		public function init (pCallBack:Function): void {
 			
 			gameContainer = new Sprite();

@@ -1,7 +1,8 @@
-package com.monsterlab.sprites.gameobjects 
+package com.monsterlab.game.gameobjects.sprites 
 {
-	import com.monsterlab.GameObject;
+	import com.monsterlab.game.gameobjects.GameObject;
 	import com.monsterlab.GameStage;
+	import com.monsterlab.game.gameobjects.sprites.MixerController;
 	import com.utils.FMath;
 	import com.utils.SoundManager;
 	import flash.display.DisplayObject;
