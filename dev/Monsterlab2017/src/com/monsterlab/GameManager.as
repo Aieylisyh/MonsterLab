@@ -7,6 +7,7 @@ package com.monsterlab
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
 	import com.monsterlab.sprites.gameobjects.Effect;
+	import com.monsterlab.sprites.gameobjects.Mixer;;
 	public class GameManager 
 	{
 		protected static var instance: GameManager;
@@ -32,10 +33,11 @@ package com.monsterlab
 			trace("GameManager startGame is running fine");
 			UIManager.getInstance().closeScreens();
 			GameStage.getInstance().addInterFace();
-			GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
+			//GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
-			btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V, false);
+			btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V*0.8, false);
 			GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
+			GameStage.getInstance().getGameContainer_2().addChild(Mixer.getInstance());
 		}
 		
 		private var i:int = 0;

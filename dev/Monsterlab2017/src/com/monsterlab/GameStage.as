@@ -5,7 +5,8 @@ package com.monsterlab {
 	import com.utils.Config;
 	import flash.display.Sprite;
 	import flash.events.Event;
-
+	import flash.geom.Point;
+	import flash.text.TextField;
 	public class GameStage extends Sprite 
 	{
 		
@@ -115,9 +116,7 @@ package com.monsterlab {
 			
 			x = (Config.stage.stageWidth-SAFE_ZONE_WIDTH*scaleX) * 0.5;
 			y = (Config.stage.stageHeight - SAFE_ZONE_HEIGHT * scaleY) * 0.5;
-			
 		}
-		
 		/**
 		 * accès en lecture au conteneur de jeu
 		 * @return gameContainer
@@ -140,7 +139,13 @@ package com.monsterlab {
 		public function getGameContainer_5 (): Sprite {
 			return gameLayer_5;
 		}
-
+		
+		public function stagePointToScreenPoint (p:Point): Point {
+			var point:Point = new Point(p.x, p.y);
+			point.x = p.x / this.scaleX - this.x / this.scaleX;
+			point.y = p.y / this.scaleY - this.y / this.scaleY;
+			return point;
+		}
 		/**
 		 * accès en lecture au conteneur d'écrans
 		 * @return screensContainer
