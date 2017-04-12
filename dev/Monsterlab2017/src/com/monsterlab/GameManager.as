@@ -1,14 +1,16 @@
 package com.monsterlab 
 {
+	import com.monsterlab.game.gameobjects.GameObject;
 	import com.monsterlab.game.gameobjects.sprites.Button;
 	import com.monsterlab.game.gameobjects.sprites.Player;
+	import com.monsterlab.ui.screens.Hud;
+	import com.monsterlab.ui.screens.TitleCard;
+	import com.monsterlab.ui.screens.GameOverScreen;
 	import com.monsterlab.ui.UIManager;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import com.monsterlab.game.gameobjects.sprites.Effect;
-	import com.monsterlab.game.gameobjects.sprites.Mixer;;
-	import com.monsterlab.game.gameobjects.GameObject;
-	import com.monsterlab.ui.screens.GameOverScreen;
-	import com.monsterlab.ui.screens.TitleCard;
+	import flash.text.TextField;
 	public class GameManager 
 	{
 		protected static var instance: GameManager;
@@ -34,11 +36,26 @@ package com.monsterlab
 			trace("GameManager startGame is running fine");
 			UIManager.getInstance().closeScreens();
 			GameStage.getInstance().addInterFace();
-			//GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
+			GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
-			//btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V*0.8, false);
+			//btnTestAnim = new Button("BtnTest", test, 10, GameStage.MID_V, false);
 			//GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
-			GameStage.getInstance().getGameContainer_2().addChild(Mixer.getInstance());
+			var myText:TextField = new TextField();
+			myText.text = "coucou";
+			//GameStage.getInstance().getHudContainer().addChild(myText);
+			myText.x = 150;
+			myText.y = 50;
+			Hud.getInstance().addChild(myText);
+			GameStage.getInstance().getHudContainer().addChild(Hud.getInstance());
+			myText.text = "hello";	
+			
+			//var lHudContainer:Sprite = GameStage.getInstance().getHudContainer();
+					
+			//GameStage.getInstance().getHudContainer().addChild(myText);
+			//lHudContainer.addChild(Hud.getInstance());
+			
+			
+			//UIManager.getInstance().addScreen(Hud.getInstance());
 		}
 		
 		private var i:int = 0;

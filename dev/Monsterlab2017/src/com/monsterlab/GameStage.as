@@ -2,13 +2,13 @@ package com.monsterlab {
 	
 	import com.Main;
 	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.ui.screens.Hud;
+	import com.monsterlab.ui.screens.PauseScreen;
+	import com.monsterlab.ui.UIManager;
 	import com.utils.Config;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.geom.Point;
-	import flash.text.TextField;
-	import com.monsterlab.ui.UIManager;
-	import com.monsterlab.ui.screens.PauseScreen;
+
 	public class GameStage extends Sprite 
 	{
 		
@@ -69,7 +69,6 @@ package com.monsterlab {
 		}
 		public function addInterFace():void {
 			var btnQuit:Button;
-			//btnQuit = new Button("BtnQuit", Main.getInstance().exit, 0,48,true);
 			btnQuit = new Button("BtnQuit", testPause, 0,48,true);
 			hudContainer.addChild(btnQuit);
 		}
@@ -92,19 +91,23 @@ package com.monsterlab {
 			gameContainer.addChild(gameLayer_3);
 			gameContainer.addChild(gameLayer_4);
 			gameContainer.addChild(gameLayer_5);
+			
+			
+			
+			
 			screensContainer = new Sprite();
 			addChild(screensContainer);//screen
 			screensContainer.x = MID_H;
 			screensContainer.y = MID_V;
 			
-			hudContainer = new Sprite();//hud
-			addChild(hudContainer);
-			
 			popinContainer = new Sprite();//popin maybe never used
 			addChild(popinContainer);
 			popinContainer.x = MID_H;
 			popinContainer.y = MID_V;
-			
+			hudContainer = new Sprite();//hud
+			addChild(hudContainer);
+			hudContainer.x = MID_H;
+			hudContainer.y = MID_V;
 			Config.stage.addEventListener(Event.RESIZE, resize);
 			resize();
 			
@@ -124,7 +127,9 @@ package com.monsterlab {
 			
 			x = (Config.stage.stageWidth-SAFE_ZONE_WIDTH*scaleX) * 0.5;
 			y = (Config.stage.stageHeight - SAFE_ZONE_HEIGHT * scaleY) * 0.5;
+			
 		}
+		
 		/**
 		 * accès en lecture au conteneur de jeu
 		 * @return gameContainer
@@ -148,12 +153,10 @@ package com.monsterlab {
 			return gameLayer_5;
 		}
 		
-		public function stagePointToScreenPoint (p:Point): Point {
-			var point:Point = new Point(p.x, p.y);
-			point.x = p.x / this.scaleX - this.x / this.scaleX;
-			point.y = p.y / this.scaleY - this.y / this.scaleY;
-			return point;
+		public function initHud():void {
+			hudContainer.addChild(Hud.getInstance());
 		}
+
 		/**
 		 * accès en lecture au conteneur d'écrans
 		 * @return screensContainer
