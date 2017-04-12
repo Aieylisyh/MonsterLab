@@ -98,8 +98,7 @@ package com
 			//lLoader.addTxtFile("sound.xml");
 			lLoader.addDisplayFile("assets.swf");
 			lLoader.addDisplayFile("ui.swf");
-			lLoader.addDisplayFile("hud.swf");
-			//lLoader.addDisplayFile("sound.swf");
+			lLoader.addDisplayFile("sounds.swf");
 			
 			lLoader.addEventListener(AssetsLoaderEvent.PROGRESS, onLoadProgress);
 			lLoader.addEventListener(AssetsLoaderEvent.COMPLETE, onLoadComplete);
