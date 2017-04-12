@@ -2,6 +2,7 @@ package com.monsterlab {
 	
 	import com.Main;
 	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.ui.screens.Hud;
 	import com.monsterlab.ui.screens.PauseScreen;
 	import com.monsterlab.ui.UIManager;
 	import com.utils.Config;
@@ -92,8 +93,7 @@ package com.monsterlab {
 			gameContainer.addChild(gameLayer_5);
 			
 			
-			hudContainer = new Sprite();//hud
-			addChild(hudContainer);
+			
 			
 			screensContainer = new Sprite();
 			addChild(screensContainer);//screen
@@ -104,7 +104,10 @@ package com.monsterlab {
 			addChild(popinContainer);
 			popinContainer.x = MID_H;
 			popinContainer.y = MID_V;
-			
+			hudContainer = new Sprite();//hud
+			addChild(hudContainer);
+			hudContainer.x = MID_H;
+			hudContainer.y = MID_V;
 			Config.stage.addEventListener(Event.RESIZE, resize);
 			resize();
 			
@@ -148,6 +151,10 @@ package com.monsterlab {
 		}
 		public function getGameContainer_5 (): Sprite {
 			return gameLayer_5;
+		}
+		
+		public function initHud():void {
+			hudContainer.addChild(Hud.getInstance());
 		}
 
 		/**

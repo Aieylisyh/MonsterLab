@@ -28,10 +28,6 @@ package com.monsterlab.ui.screens {
 			super();
 		}
 		
-		public function initBtn():void {
-			addListeners();	
-		}
-		
 		public static function getInstance (): TitleCard {
 			if (instance == null) instance = new TitleCard();
 			return instance;
