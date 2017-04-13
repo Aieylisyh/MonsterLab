@@ -17,7 +17,7 @@ package com.monsterlab.ui
 			
 		}
 		
-		public static function setColor(pObject:DisplayObject, pColor1:String, pColor2:String = "0x7F7F7F", pColor3:String = "0x7F7F7F"):String
+		public static function setColor(pObject:DisplayObject, pColor1:String, pColor2:String = "0x7F7F7F", pColor3:String = "0x7F7F7F", pAlpha:Number=1):String
 		{
 			//red
 			var lRed:Number = colorCalcul(pColor1, pColor2, pColor3, "red") / 255;
@@ -28,7 +28,7 @@ package com.monsterlab.ui
 			filterMatrix = filterMatrix.concat([lRed, 0, 0, 0, 0]); // red
 			filterMatrix = filterMatrix.concat([0, lGreen, 0, 0, 0]); // green
 			filterMatrix = filterMatrix.concat([0, 0, lBlue, 0, 0]); // blue
-			filterMatrix = filterMatrix.concat([0, 0, 0, 1, 0]); // alpha
+			filterMatrix = filterMatrix.concat([0, 0, 0, pAlpha, 0]); // alpha
 			var s:String = "0x" + (int(lRed * 255)).toString(16) + (int(lGreen * 255)).toString(16) + (int(lBlue * 255)).toString(16);
 			applyFilter(pObject, filterMatrix);
 			return s;
