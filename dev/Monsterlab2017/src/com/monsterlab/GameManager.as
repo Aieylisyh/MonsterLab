@@ -1,7 +1,9 @@
 package com.monsterlab 
 {
 	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.game.gameobjects.sprites.Ingredient;
 	import com.monsterlab.game.gameobjects.sprites.Player;
+	import com.monsterlab.game.gameobjects.sprites.Recipe;
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
 	import com.monsterlab.game.gameobjects.sprites.Effect;
@@ -47,6 +49,10 @@ package com.monsterlab
 			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
 			GameStage.getInstance().getGameContainer_4().addChild(Hud.getInstance());
 			testDrag();
+			//Recipe.initIngredientList();
+			var lIngredient:Ingredient = new Ingredient();
+			GameStage.getInstance().getGameContainer_5().addChild(lIngredient);
+			lIngredient.startMove();
 		}
 		
 		private var i:int = 0;
