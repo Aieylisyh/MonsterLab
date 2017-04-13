@@ -1,4 +1,4 @@
-package com.monsterlab.game.gameobjects.sprites {
+﻿package com.monsterlab.game.gameobjects.sprites {
 	import adobe.utils.CustomActions;
 	import com.monsterlab.game.gameobjects.GameObject;
 	import flash.display.MovieClip;
@@ -78,19 +78,22 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		
 		private function myOnMouseDown(e:MouseEvent):void {
+			trace("onMouseDown");
 			for each(var obj:DragDropTarget in DragDropTarget.dragObjList) {
 				if (obj != null && obj != this && obj.isDraging)
 					return;
 			}
+			//trace("onMouseDownv1");
 			if (!canBeDragged)
 				return;
+			//trace("onMouseDownv2");
 			var mousePoint:Point = GameStage.getInstance().stagePointToScreenPoint(new Point(e.stageX, e.stageY));
 			var distance:Number = FMath.getDistance(new Point(originParent.x + x, originParent.y + y), mousePoint);
 			if (distance > distanceToSelf) {
 				trace(distance);
 				return;
 			}
-			trace("onMouseDown");
+			//trace("onMouseDownv3");
 			isDraging = true;
 			originParent.removeChild(this);
 			//startingX_drag =  (startingX - GameStage.getInstance().x)/GameStage.getInstance().scaleX;
@@ -156,7 +159,7 @@ package com.monsterlab.game.gameobjects.sprites {
 				if (!isDraging && !canBeDragged && willGoBack) {
 					var targetPos:Point = new Point(originParent.x+startingX,originParent.y+startingY);
 					var distance:Number = FMath.getDistance(new Point(x,y),targetPos );
-					if (distance>6) {
+					if (distance>20) {
 						//trace("GONING BACK");
 						x -= (x-targetPos.x)*0.25;
 						y -= (y-targetPos.y)*0.25;
@@ -183,7 +186,8 @@ package com.monsterlab.game.gameobjects.sprites {
 		{
 			var i:int = dragObjList.indexOf(this);
 			dragObjList.splice(i, 1);
-			removeChild(graphic);
+			if(graphic!=null)
+				removeChild(graphic);
 			graphic = null;
 			super.destroy();
 		}
