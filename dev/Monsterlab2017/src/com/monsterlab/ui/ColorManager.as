@@ -34,6 +34,15 @@ package com.monsterlab.ui
 			return s;
 		}
 		
+		public static function getColor(pColor1:String, pColor2:String = "0x7F7F7F", pColor3:String = "0x7F7F7F"):String
+		{
+			var lRed:Number = colorCalcul(pColor1, pColor2, pColor3, "red") ;
+			var lGreen:Number = colorCalcul(pColor1, pColor2, pColor3, "green") ;
+			var lBlue:Number = colorCalcul(pColor1, pColor2, pColor3, "blue") ;
+			var s:String = "0x" + (int(lRed )).toString(16) + (int(lGreen )).toString(16) + (int(lBlue)).toString(16);
+			return s;
+		}
+		
 		private static function applyFilter(pObject:DisplayObject, matrix:Array):void {
             var filter:ColorMatrixFilter = new ColorMatrixFilter(matrix);
             var filters:Array = new Array();

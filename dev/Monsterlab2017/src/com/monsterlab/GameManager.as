@@ -25,11 +25,12 @@ package com.monsterlab
 		public var spawnFrame:int = 80;
 		
 		public function spawn():void {
-			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
-			var lIngredient:Ingredient = new Ingredient();
-			lIngredient.init(lInfos[0], lInfos[1]);
-			//Le replacer en fonction de la position du spawner
-			lIngredient.startMove();
+			Recipe.initIngredientList();
+			//var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
+			//trace(lInfos);
+			var pEffet:Effect	 = new Effect("Explosion12");
+			pEffet.init_float(GameStage.MID_H, GameStage.MID_V * 1.4, 0, 99999, 150, 100, 0);//must not be scaled!
+			new Ingredient(Math.floor(Math.random() *7), pEffet);
 		}
 		
 		public function GameManager() 
@@ -54,39 +55,17 @@ package com.monsterlab
 			trace("GameManager startGame is running fine");
 			UIManager.getInstance().closeScreens();
 			GameStage.getInstance().addInterFace();
-			//GameStage.getInstance().getGameContainer_2().addChild(Player.getInstance());
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
 			btnTestAnim = new Button("Btn4", test, 10, GameStage.MID_V*0.8, false);
 			//GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
 			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
 			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
-			GameStage.getInstance().getGameContainer_4().addChild(Hud.getInstance());
-			testDrag();
-			//Recipe.initIngredientList();
-			var lIngredient:Ingredient = new Ingredient();
-			GameStage.getInstance().getGameContainer_5().addChild(lIngredient);
-			lIngredient.startMove();
+			GameStage.getInstance().getGameContainer_2().addChild(Hud.getInstance());
+			spawn();
 		}
 		
 		private var i:int = 0;
 		private var effs:Vector.<Effect> = new Vector.<Effect>();
-		
-		private function testDrag():void {
-			var pEffet:Effect	 = new Effect("Explosion11");
-			pEffet.init_float(GameStage.MID_H, GameStage.MID_V*1.4,0,99999,150,100,0);//must not be scaled!
-			var pDragTarget1:DragDropTarget	 = new DragDropTarget("ShootBoss");
-			pDragTarget1.init(pEffet, Mixer.getInstance(), 0, 0, 0, 2, 90);
-			var pDragTarget2:DragDropTarget	 = new DragDropTarget("ShootBoss");
-			pDragTarget2.init(pEffet, Mixer.getInstance(), 220, 0, 0, 2, 90);
-			var pDragTarget3:DragDropTarget	 = new DragDropTarget("ShootBoss");
-			pDragTarget3.init(pEffet, Mixer.getInstance(), -220, 0, 0, 2, 90);
-			var pDragTarget11:DragDropTarget	 = new DragDropTarget("ShootBoss");
-			pDragTarget11.init(pEffet, Mixer.getInstance(), 0, 110, 0, 2, 90);
-			var pDragTarget12:DragDropTarget	 = new DragDropTarget("ShootBoss");
-			pDragTarget12.init(pEffet, Mixer.getInstance(), 220, 110, 0, 2, 90);
-			var pDragTarget13:DragDropTarget	 = new DragDropTarget("ShootBoss");
-			pDragTarget13.init(pEffet, Mixer.getInstance(), -220, 110, 0, 2, 90);
-		}
 		
 		private function gameLoop(_:Event):void {
 			defaultLoop();
