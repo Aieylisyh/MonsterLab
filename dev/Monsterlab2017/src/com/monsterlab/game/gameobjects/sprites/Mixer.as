@@ -8,6 +8,7 @@ package com.monsterlab.game.gameobjects.sprites
 	import com.utils.SoundManager;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -34,6 +35,7 @@ package com.monsterlab.game.gameobjects.sprites
 		private var lastRotationSpeed:Number;
 		private var effs:Vector.<Effect> = new Vector.<Effect>();
 		private var liquideAnimation:LiquidInTube;
+		private var _potionContainer:Sprite;
 		//private var myIngredient:Vector.<Ingredient> = new CustomActions
 		
 		private function get enoughToMix():Boolean {
@@ -63,6 +65,12 @@ package com.monsterlab.game.gameobjects.sprites
 			text2.scaleX = text2.scaleY = 4;
 			text2.x = this.x-100 ;
 			text2.y = this.y + 100;*/
+			if (_potionContainer == null) {
+				_potionContainer = new Sprite();
+				GameStage.getInstance().getGameContainer_5().addChild(_potionContainer);
+				_potionContainer.x = 440+x;
+				_potionContainer.y = 20+y;
+			}
 		}
 		
 		public static function getInstance (): Mixer {
@@ -98,7 +106,7 @@ package com.monsterlab.game.gameobjects.sprites
 					onStartMixerRotating();
 				}
 				isMixerRotating = true;
-				if (enoughToMix)
+				if (numIngredient>0)
 					liquideAnimation.setPercentage(rotateSpeed);
 			}
 			if (!controller.isDraging)
@@ -133,18 +141,20 @@ package com.monsterlab.game.gameobjects.sprites
 				SoundManager.getInstance().stopSound(mySoundIndex);
 			}
 			mySoundIndex = SoundManager.getInstance().makeSound ("sound_mixer",99);
-			if (enoughToMix) {
+			if (numIngredient>0/*????*/) {
 				//liquideAnimation.setColor(?????);
 				startEffects();
 			}
 		}
 		
 		public function addIngredient(ingredient:int = 0):Boolean {
-			if (!enoughToMix) {
+			if (!enoughToMix && !liquideAnimation.isInProgress()) {
 				//place image
+				trace("addIngredient 1");
 				numIngredient++;
 				return true;
 			}else {
+				trace("can not addIngredient");
 				return false;
 			}
 		}
@@ -155,7 +165,7 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		private function startEffects():void {
-			var sign = 1;
+			var sign:int = 1;
 			if (rotateSpeed < 0)
 				sign =-1;
 			stopEffects();
@@ -180,6 +190,7 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		private function stopEffects():void {
+		
 			
 			for each(var pEff:Effect in effs) {
 				if (pEff != null)
@@ -187,6 +198,7 @@ package com.monsterlab.game.gameobjects.sprites
 			}
 		}
 		/*private function setSound(vol:Number ):void {
+		
 			if (mySoundIndex >-1) {
 				vol = vol * 1.2;
 				vol = Math.min(vol, 0.1);
@@ -194,5 +206,18 @@ package com.monsterlab.game.gameobjects.sprites
 				SoundManager.getInstance().setSoundVol (mySoundIndex,vol);
 			}
 		}*/
+		
+		public function generatePotion():void {
+			numIngredient = 0;
+			//clear Ingredient
+			var potionType:String;
+			var potionColor:String;
+			var potion:Potion = new Potion(potionType, potionColor);
+			rotateSpeed = 0;
+		}
+		
+		public function getPotionContainer():Sprite {
+			return _potionContainer;
+		}
 	}
 }

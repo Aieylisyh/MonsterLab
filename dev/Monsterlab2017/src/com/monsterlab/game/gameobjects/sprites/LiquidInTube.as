@@ -36,8 +36,18 @@ package com.monsterlab.game.gameobjects.sprites
 			var delta:int = Math.floor(Math.abs(speed / MixerController.MAXROTATIONSPEED) * 4);
 			if (delta <= 0)
 				return;
+			if (delta > 0 && liquid.currentFrame == liquid.totalFrames) {
+				trace("liquid finish!");
+				liquid.gotoAndStop(1);
+				Mixer.getInstance().generatePotion();
+				return;
+			}
 			liquid.gotoAndStop(int(liquid.currentFrame+speed * liquid.totalFrames));
-			trace("setPercentage|liquid.currentFrame "+liquid.currentFrame);
+			trace("liquid.currentFrame " + liquid.currentFrame);
+		}
+		
+		public function isInProgress():Boolean {
+			return liquid.currentFrame != 1;
 		}
 	}
 }

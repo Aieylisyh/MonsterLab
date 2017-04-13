@@ -55,8 +55,18 @@ package com.monsterlab
 		private function testDrag():void {
 			var pEffet:Effect	 = new Effect("Explosion11");
 			pEffet.init_float(GameStage.MID_H, GameStage.MID_V*1.4,0,99999,150,100,0);//must not be scaled!
-			var pDragTarget:DragDropTarget	 = new DragDropTarget("ShootBoss");
-			pDragTarget.init(pEffet, 0, 0, 0, 2);
+			var pDragTarget1:DragDropTarget	 = new DragDropTarget("ShootBoss");
+			pDragTarget1.init(pEffet, Mixer.getInstance(), 0, 0, 0, 2, 90);
+			var pDragTarget2:DragDropTarget	 = new DragDropTarget("ShootBoss");
+			pDragTarget2.init(pEffet, Mixer.getInstance(), 220, 0, 0, 2, 90);
+			var pDragTarget3:DragDropTarget	 = new DragDropTarget("ShootBoss");
+			pDragTarget3.init(pEffet, Mixer.getInstance(), -220, 0, 0, 2, 90);
+			var pDragTarget11:DragDropTarget	 = new DragDropTarget("ShootBoss");
+			pDragTarget11.init(pEffet, Mixer.getInstance(), 0, 110, 0, 2, 90);
+			var pDragTarget12:DragDropTarget	 = new DragDropTarget("ShootBoss");
+			pDragTarget12.init(pEffet, Mixer.getInstance(), 220, 110, 0, 2, 90);
+			var pDragTarget13:DragDropTarget	 = new DragDropTarget("ShootBoss");
+			pDragTarget13.init(pEffet, Mixer.getInstance(), -220, 110, 0, 2, 90);
 		}
 		
 		private function gameLoop(_:Event):void {

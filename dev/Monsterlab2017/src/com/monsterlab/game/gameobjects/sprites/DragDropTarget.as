@@ -1,4 +1,5 @@
 package com.monsterlab.game.gameobjects.sprites {
+	import adobe.utils.CustomActions;
 	import com.monsterlab.game.gameobjects.GameObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -18,7 +19,7 @@ package com.monsterlab.game.gameobjects.sprites {
 		private var assetName:String;
 		private var graphic:MovieClip;
 		private var speed:Point = new Point(0, 0);
-		private var tragetFunction:Function = voidFunction;
+		private var idleFunction:Function = voidFunction;
 		//private var rotationSpeed:Number = 0;
 		//private var rotationAcc:Number = 0;
 		private var startingX:Number;
@@ -33,15 +34,20 @@ package com.monsterlab.game.gameobjects.sprites {
 		public var canBeDragged:Boolean;
 		private var forceUpdateMouseMove:int;
 		private var myMouseEvent:MouseEvent;
+		private var targetSprite:Sprite;
+		private var distanceToTarget:Number;
+		private var distanceToSelf:Number;
+		private static var dragObjList:Vector.<DragDropTarget> = new Vector.<DragDropTarget>();
 		public function DragDropTarget(pName:String) 
 		{
 			super();
+			dragObjList.push(this);
 			assetName = pName;
 			start();
 			forceUpdateMouseMove = 0;
 		}
 		
-		public function init(pOriginParent:Sprite, pX:Number, pY:Number, pRotation:Number = 0, pScale:Number=1):void {
+		public function init(pOriginParent:Sprite, pTargetSprite:Sprite, pX:Number, pY:Number, pRotation:Number = 0, pScale:Number=1, pDistanceToTarget:Number=80, pDistaceToSelf:Number = 100):void {
 			var ClassReference:Class = getDefinitionByName(assetName) as Class;
             graphic = new ClassReference();
 			graphic.mouseChildren = false;
@@ -51,10 +57,15 @@ package com.monsterlab.game.gameobjects.sprites {
 				//graphic.cacheAsBitmapMatrix = new Matrix();
 			}
 			addChild(graphic);
+			targetSprite = pTargetSprite;
+			distanceToTarget = pDistanceToTarget;
+			distanceToSelf = pDistaceToSelf;
 			if(pRotation!=0)
 				rotation = pRotation;
 			startingX = pX;
 			startingY = pY;
+			x = pX;
+			y = pY;
 			scaleX = scaleY = pScale;
 			originParent = pOriginParent;
 			originParent.addChild(this);
@@ -68,11 +79,15 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		
 		private function myOnMouseDown(e:MouseEvent):void {
+			for each(var obj:DragDropTarget in DragDropTarget.dragObjList) {
+				if (obj != null && obj != this && obj.isDraging)
+					return;
+			}
 			if (!canBeDragged)
 				return;
 			var mousePoint:Point = GameStage.getInstance().stagePointToScreenPoint(new Point(e.stageX, e.stageY));
 			var distance:Number = FMath.getDistance(new Point(originParent.x + x, originParent.y + y), mousePoint);
-			if (distance > 100) {
+			if (distance > distanceToSelf) {
 				trace(distance);
 				return;
 			}
@@ -102,19 +117,25 @@ package com.monsterlab.game.gameobjects.sprites {
 			if (isDraging) {
 				//trace(x + " me " + y);
 				//trace(Mixer.getInstance().x + " Mixer " + Mixer.getInstance().y);
-				var targetPos:Point = new Point(Mixer.getInstance().x,Mixer.getInstance().y);
-				var distance:Number = FMath.getDistance(new Point(x,y),targetPos );
-				if (distance > 80) {
+				var targetPos:Point = new Point(targetSprite.x,targetSprite.y);
+				var distance:Number = FMath.getDistance(new Point(x, y), targetPos );
+				//trace(distance);
+				if (distance > distanceToTarget) {
 					willGoBack = true;
-				}
-				else if (Mixer.getInstance().addIngredient(/*??????*/)) {
-					willGoBack = false;
-					willBeDestroyed = true;
-				}else {
-					willGoBack = true;
+				} else {
+					onDragToTarget();
 				}
 				isDraging = false;
 				canBeDragged = false;
+			}
+		}
+		
+		protected function onDragToTarget():void {
+			 if (Mixer.getInstance().addIngredient(/*??????*/)) {
+				willGoBack = false;
+				willBeDestroyed = true;
+			}else {
+				willGoBack = true;
 			}
 		}
 		
@@ -138,7 +159,6 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		
 		override protected function doActionNormal (): void {
-			tragetFunction();
 			super.doActionNormal();
 			if (graphic == null) {
 				willBeDestroyed = true;
@@ -148,8 +168,8 @@ package com.monsterlab.game.gameobjects.sprites {
 					var distance:Number = FMath.getDistance(new Point(x,y),targetPos );
 					if (distance>6) {
 						//trace("GONING BACK");
-						x -= (x-originParent.x)*0.25;
-						y -= (y-originParent.y)*0.25;
+						x -= (x-targetPos.x)*0.25;
+						y -= (y-targetPos.y)*0.25;
 					}else {
 						//trace(" BACK");
 						originParent.addChild(this);
@@ -161,12 +181,16 @@ package com.monsterlab.game.gameobjects.sprites {
 				}else if (forceUpdateMouseMove > 0) {
 					forceUpdateMouseMove--;
 					//myOnMouseMove(myMouseEvent);
-					trace(x+"  "+y);
+					//trace(x+"  "+y);
+				}else if (!isDraging && canBeDragged) {
+					idleFunction();
 				}
 			}
 		}
 		override public function destroy():void
 		{
+			var i:int = dragObjList.indexOf(this);
+			dragObjList.splice(i, 1);
 			removeChild(graphic);
 			graphic = null;
 			super.destroy();
