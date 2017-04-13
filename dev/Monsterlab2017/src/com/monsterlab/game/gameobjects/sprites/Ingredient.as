@@ -57,12 +57,12 @@ package com.monsterlab.game.gameobjects.sprites
 		
 		public function Ingredient(pIngredientID:int, pContainer:Sprite, pType:String="unknown", pColor:String="oxFF0000", pX:Number=0, pY:Number=0) 
 		{
-			super("Explosion11");
+			super("Ingredient_default");
 			init(pContainer, Mixer.getInstance(), pX, pY, 0, 1, 80, 75);
 			type = (Ingredient.INGREDIENTS_LIST[pIngredientID])[0];
 			color = (Ingredient.INGREDIENTS_LIST[pIngredientID])[1];
 			ColorManager.setColor(this, color);
-			trace("Ingredient color is " + color);
+			//trace("Ingredient color is " + color);
 			pContainer.addChild(this);
 			start();
 		}
