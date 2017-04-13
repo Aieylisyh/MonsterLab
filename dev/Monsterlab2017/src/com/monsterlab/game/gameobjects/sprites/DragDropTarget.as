@@ -131,12 +131,7 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		
 		protected function onDragToTarget():void {
-			 if (Mixer.getInstance().addIngredient(null)) {
-				willGoBack = false;
-				willBeDestroyed = true;
-			}else {
-				willGoBack = true;
-			}
+			 willGoBack = true;
 		}
 		
 		private function myOnMouseMove(e:MouseEvent=null):void {

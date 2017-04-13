@@ -4,6 +4,7 @@ package com.monsterlab.game.gameobjects.sprites
 	import flash.display.MovieClip;
 	import flash.geom.ColorTransform;
 	import flash.display.BitmapData;
+	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;
 	/**
 	 * ...
@@ -21,9 +22,10 @@ package com.monsterlab.game.gameobjects.sprites
 		public function LiquidInTube() 
 		{
 			super();
-			var ClassReference:Class = getDefinitionByName("Explosion10") as Class;
+			var ClassReference:Class = getDefinitionByName("Scientist_surprise") as Class;
             liquid = new ClassReference();
-			liquid.stop();
+			liquid.gotoAndStop(1);
+			addChild(liquid);
 		}
 		
 		public function setColor(color:uint):void {
@@ -33,7 +35,7 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		public function setPercentage(speed:Number):void {
-			var delta:int = Math.floor(Math.abs(speed / MixerController.MAXROTATIONSPEED) * 4);
+			var delta:int = Math.floor(Math.abs(speed / MixerController.MAXROTATIONSPEED) * 1.1);
 			if (delta <= 0)
 				return;
 			if (delta > 0 && liquid.currentFrame == liquid.totalFrames) {
@@ -42,7 +44,7 @@ package com.monsterlab.game.gameobjects.sprites
 				Mixer.getInstance().generatePotion();
 				return;
 			}
-			liquid.gotoAndStop(int(liquid.currentFrame+speed * liquid.totalFrames));
+			liquid.gotoAndStop(int(liquid.currentFrame+delta));
 			trace("liquid.currentFrame " + liquid.currentFrame);
 		}
 		

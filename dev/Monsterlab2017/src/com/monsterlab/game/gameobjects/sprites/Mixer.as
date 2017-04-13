@@ -14,6 +14,7 @@ package com.monsterlab.game.gameobjects.sprites
 	import flash.geom.Rectangle;
 	import flash.media.Sound;
 	import flash.text.TextField;
+	import com.monsterlab.ui.ColorManager;
 	/**
 	 * ...
 	 * @author Song Huang
@@ -56,6 +57,9 @@ package com.monsterlab.game.gameobjects.sprites
 			rotateSpeed = 0;
 			hasPotion = false;
 			liquideAnimation = new LiquidInTube();
+			GameStage.getInstance().getGameContainer_3().addChild(liquideAnimation);
+			liquideAnimation.x = this.x;
+			liquideAnimation.y = this.y;
 			/*text1 = new TextField();
 			GameStage.getInstance().getGameContainer_3().addChild(text1);
 			text1.scaleX = text1.scaleY = 4;
@@ -130,7 +134,7 @@ package com.monsterlab.game.gameobjects.sprites
 		
 		private function onStopMixerRotating():void {
 			if (mySoundIndex >-1) {
-				trace("stop"+mySoundIndex);
+				trace("stop mySoundIndex="+mySoundIndex);
 				SoundManager.getInstance().stopSound(mySoundIndex);
 			}
 			mySoundIndex =-100;
@@ -174,24 +178,21 @@ package com.monsterlab.game.gameobjects.sprites
 			if (rotateSpeed < 0)
 				sign =-1;
 			stopEffects();
-			var eff0:Effect = new Effect("ShootBoss");
-			eff0.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4*sign, 0,     4, 25, 22);
-			var eff1:Effect = new Effect("ShootBoss");
-			eff1.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4*sign, 60,    4, 25, 22);
-			var eff2:Effect = new Effect("ShootBoss");
-			eff2.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4*sign, 120,   4, 25, 22);
-			var eff3:Effect = new Effect("ShootBoss");
-			eff3.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4*sign, 180,   4, 25, 22);
-			var eff4:Effect = new Effect("ShootBoss");
-			eff4.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4*sign, 240,   4, 25, 22);
-			var eff5:Effect = new Effect("ShootBoss");
-			eff5.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4*sign, 300,   4, 25, 22);
-			effs.push(eff0);
-			effs.push(eff1);
-			effs.push(eff2);
-			effs.push(eff3);
-			effs.push(eff4);
-			effs.push(eff5);
+			var color:String = "";
+			if(ingredients.length==3)
+				color = ColorManager.getColor( ingredients[0].color,  ingredients[1].color, ingredients[2].color);
+			else if(ingredients.length==2)
+				color = ColorManager.getColor( ingredients[0].color,  ingredients[1].color);
+			else if(ingredients.length==1)
+				color = ColorManager.getColor( ingredients[0].color);
+			else
+				trace("wrong ingredients.length:"+ingredients.length);
+			for (var i:int = 0; i < 6; i++ ) {
+				var eff0:Effect = new Effect("Explosion11");
+				eff0.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4 * sign, 60*i,     4, 25, 22);
+				ColorManager.setColor(eff0,color);
+				effs.push(eff0);
+			}
 		}
 		
 		private function stopEffects():void {
@@ -213,7 +214,6 @@ package com.monsterlab.game.gameobjects.sprites
 		}*/
 		
 		public function generatePotion():void {
-			deleteIngredients();
 			//clear Ingredient
 			//var potionType:String = getPotionTypeByIngredientType();
 			var potionType:String = "potion";
@@ -226,6 +226,7 @@ package com.monsterlab.game.gameobjects.sprites
 			else
 				trace("wrong ingredients.length:"+ingredients.length);
 			rotateSpeed = 0;
+			deleteIngredients();
 			hasPotion = true;
 		}
 		
