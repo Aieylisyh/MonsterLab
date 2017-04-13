@@ -46,7 +46,6 @@ package com.monsterlab.ui.screens {
 		}
 		
 		private function startGame(pEvent:MouseEvent):void {
-			trace("patate");
 			GameManager.getInstance().startGame();
 		}
 		

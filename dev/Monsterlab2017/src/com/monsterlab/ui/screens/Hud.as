@@ -1,5 +1,6 @@
 package com.monsterlab.ui.screens 
 {
+	import com.monsterlab.GameManager;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.Screen;
 	import com.monsterlab.ui.UIManager;
@@ -21,6 +22,7 @@ package com.monsterlab.ui.screens
 		public var Recipe2:MovieClip;
 		public var Recipe3:MovieClip;
 		public var mcRecipe:MovieClip;
+		public var mcConveyor:MovieClip;
 		
 		/**
 		 * instance unique de la classe Hud
@@ -56,7 +58,7 @@ package com.monsterlab.ui.screens
 		}
 		
 		private function onClickPause(pEvent:MouseEvent):void {
-			//GameManger.getInstance().onPause();
+			GameManager.getInstance().onPause();
 			UIManager.getInstance().addScreen(PauseScreen.getInstance());
 		}
 		
