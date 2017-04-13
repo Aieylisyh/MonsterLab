@@ -28,7 +28,6 @@ package com.monsterlab.game.gameobjects.sprites
 		private var rotateAcc:Number=0.3;
 		private var text1:TextField;
 		private var text2:TextField;
-		private var numIngredient:int;
 		private var numIngredientPerPotion:int=3;
 		private var isMixerRotating:Boolean;
 		private var mySoundIndex:int =-100;
@@ -36,10 +35,12 @@ package com.monsterlab.game.gameobjects.sprites
 		private var effs:Vector.<Effect> = new Vector.<Effect>();
 		private var liquideAnimation:LiquidInTube;
 		private var _potionContainer:Sprite;
+		private var hasPotion:Boolean;
+		private var ingredients:Vector.<Ingredient> = new Vector.<Ingredient>();
 		//private var myIngredient:Vector.<Ingredient> = new CustomActions
 		
 		private function get enoughToMix():Boolean {
-		   return numIngredient>=numIngredientPerPotion;
+		   return ingredients.length>=numIngredientPerPotion;
 		}
 	
 		public function Mixer() 
@@ -51,9 +52,9 @@ package com.monsterlab.game.gameobjects.sprites
 			controller = new MixerController(this);
 			controller.start();//receive event, can drag
 			start();
-			numIngredient = 0;
 			isMixerRotating = false;
 			rotateSpeed = 0;
+			hasPotion = false;
 			liquideAnimation = new LiquidInTube();
 			/*text1 = new TextField();
 			GameStage.getInstance().getGameContainer_3().addChild(text1);
@@ -106,7 +107,7 @@ package com.monsterlab.game.gameobjects.sprites
 					onStartMixerRotating();
 				}
 				isMixerRotating = true;
-				if (numIngredient>0)
+				if (ingredients.length>0 && !hasPotion)
 					liquideAnimation.setPercentage(rotateSpeed);
 			}
 			if (!controller.isDraging)
@@ -141,17 +142,21 @@ package com.monsterlab.game.gameobjects.sprites
 				SoundManager.getInstance().stopSound(mySoundIndex);
 			}
 			mySoundIndex = SoundManager.getInstance().makeSound ("sound_mixer",99);
-			if (numIngredient>0/*????*/) {
+			if (ingredients.length>0/*????*/) {
 				//liquideAnimation.setColor(?????);
 				startEffects();
 			}
 		}
 		
-		public function addIngredient(ingredient:int = 0):Boolean {
+		public function addIngredient(ingredient:Ingredient):Boolean {
+			if (ingredient == null) {
+				trace("addIngredient null!");
+				return false;
+			}
 			if (!enoughToMix && !liquideAnimation.isInProgress()) {
 				//place image
 				trace("addIngredient 1");
-				numIngredient++;
+				ingredients.push(ingredient)
 				return true;
 			}else {
 				trace("can not addIngredient");
@@ -208,12 +213,30 @@ package com.monsterlab.game.gameobjects.sprites
 		}*/
 		
 		public function generatePotion():void {
-			numIngredient = 0;
+			deleteIngredients();
 			//clear Ingredient
-			var potionType:String;
-			var potionColor:String;
-			var potion:Potion = new Potion(potionType, potionColor);
+			//var potionType:String = getPotionTypeByIngredientType();
+			var potionType:String = "potion";
+			if(ingredients.length==3)
+				new Potion(potionType, ingredients[0].color,  ingredients[1].color, ingredients[2].color);
+			else if(ingredients.length==2)
+				new Potion(potionType, ingredients[0].color,  ingredients[1].color);
+			else if(ingredients.length==1)
+				new Potion(potionType, ingredients[0].color);
+			else
+				trace("wrong ingredients.length:"+ingredients.length);
 			rotateSpeed = 0;
+			hasPotion = true;
+		}
+		
+		private function deleteIngredients():void {
+			for each(var pIngredient:Ingredient in ingredients)
+				pIngredient.willBeDestroyed = true;
+			ingredients = new Vector.<Ingredient>();
+		}
+		
+		public function potionUsed():void {
+			hasPotion = false;
 		}
 		
 		public function getPotionContainer():Sprite {
