@@ -20,9 +20,22 @@ package com.monsterlab
 		protected static var instance: GameManager;
 		public var btnTestAnim:Button;
 		private var isPaused:Boolean;
+		
+		private var spawnTimer:int = 0;
+		public var spawnFrame:int = 80;
+		
+		public function spawn():void {
+			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
+			var lIngredient:Ingredient = new Ingredient();
+			lIngredient.init(lInfos[0], lInfos[1]);
+			//Le replacer en fonction de la position du spawner
+			lIngredient.startMove();
+		}
+		
 		public function GameManager() 
 		{
 		}
+		
 		public static function getInstance (): GameManager {
 			if (instance == null) instance = new GameManager();
 			return instance;
@@ -86,6 +99,7 @@ package com.monsterlab
 				}else {
 					obj.doAction();
 				}
+				
 			}
 		}
 		

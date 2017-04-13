@@ -54,7 +54,8 @@ package com.monsterlab.game.gameobjects.sprites
 		public static function selectIngredients(pNum:int, pList:Vector.<Vector.<String>>):Vector.<Vector.<String>>{
 			var lArray:Vector.<Vector.<String>> = new Vector.<Vector.<String>>();
 			var lLength:int = pList.length;
-			for (var i:int = 0; i < pNum; i++) {
+			trace(lLength);
+			for (var i:int = 1; i < pNum; i++) {
 				var lIngredient:Vector.<String> = pList[Math.floor(Math.random() * lLength)];
 				if (lArray.length == 0) lArray.push(lIngredient);
 				else {
