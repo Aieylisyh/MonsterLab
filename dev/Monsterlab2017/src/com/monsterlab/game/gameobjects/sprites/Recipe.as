@@ -22,7 +22,7 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		public static function initIngredientList():void {
-			ingredientList = selectIngredients(5, Ingredient.INGREDIENTS_LIST);
+			ingredientList = selectIngredients(5, Ingredient.INGREDIENTS_TYPE);
 		}
 		
 		private static function checkIngredient(pIngredient:Vector.<String>, pListToPut:Vector.<Vector.<String>>, pListToTake:Vector.<Vector.<String>>):Vector.<String> {

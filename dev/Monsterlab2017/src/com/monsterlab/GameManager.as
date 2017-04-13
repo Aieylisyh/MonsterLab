@@ -21,8 +21,8 @@ package com.monsterlab
 		public var btnTestAnim:Button;
 		private var isPaused:Boolean;
 		
-		private var spawnTimer:int = 0;
-		public var spawnFrame:int = 80;
+		private var spawnTimer:int = 800;
+		public var spawnFrame:int = 800;
 		
 		public function spawn():void {
 			Recipe.initIngredientList();
@@ -79,6 +79,12 @@ package com.monsterlab
 					obj.doAction();
 				}
 				
+				if (spawnTimer == spawnFrame) {
+					//spawn ();
+					spawnTimer = 0;
+				}else {
+					spawnTimer += 1;
+				}
 			}
 		}
 		
