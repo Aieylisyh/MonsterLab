@@ -55,16 +55,11 @@ package com.monsterlab
 			UIManager.getInstance().closeScreens();
 			GameStage.getInstance().addInterFace();
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
-			btnTestAnim = new Button("Btn4", test, 10, GameStage.MID_V*0.8, false);
-			//GameStage.getInstance().getHudContainer().addChild(btnTestAnim);
 			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
 			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
 			GameStage.getInstance().getGameContainer_2().addChild(Hud.getInstance());
 			Recipe.initIngredientList();
 		}
-		
-		private var i:int = 0;
-		private var effs:Vector.<Effect> = new Vector.<Effect>();
 		
 		private function gameLoop(_:Event):void {
 			defaultLoop();
@@ -87,34 +82,6 @@ package com.monsterlab
 			}else {
 				spawnTimer += 1;
 			}
-		}
-		
-		private function test(_:Event=null):void {
-			if (i > 3) {
-				i = 0;
-				//SoundManager.getInstance().startNewBackgroundMusic("sound_type");
-			}
-			
-			for each(var pEff:Effect in effs) {
-				if (pEff != null)
-					pEff.willBeDestroyed = true;
-			}
-			effs = new Vector.<Effect>();
-			var eff0:Effect;
-			if (i == 0) {
-				eff0 = new Effect("Explosion10");
-				eff0.init_rotateAndTransit(GameStage.SAFE_ZONE_WIDTH*0.5, GameStage.SAFE_ZONE_HEIGHT * 0.5,0, 100, 0, 0, 0, 0.1);
-			}else if (i == 1) {
-				eff0 = new Effect("ShootBoss");
-				eff0.init_heartCurve(GameStage.SAFE_ZONE_WIDTH * 0.5, GameStage.SAFE_ZONE_HEIGHT * 0.5, 0, 100, 1.2, 12);
-			}else if (i == 2) {
-				
-			}else if (i == 3) {
-				eff0 = new Effect("Explosion11");
-				eff0.init_float(GameStage.SAFE_ZONE_WIDTH*0.5, GameStage.SAFE_ZONE_HEIGHT * 0.5, 0, 100, 30, 40, 10);	
-			}
-			effs.push(eff0);
-			i++;
 		}
 		
 		private function defaultLoop():void {

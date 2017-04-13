@@ -38,7 +38,7 @@ package com.monsterlab.game.gameobjects.sprites
 			super.doActionNormal();
 			x -= Conveyor.speed;
 			if (x < -30) {
-				if (myIngredient != null) myIngredient.destroy();
+				if (myIngredient != null) myIngredient.willBeDestroyed=true;
 				destroy();
 			}
 		}

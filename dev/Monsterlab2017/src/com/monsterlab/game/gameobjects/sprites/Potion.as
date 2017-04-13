@@ -17,10 +17,16 @@ package com.monsterlab.game.gameobjects.sprites
 		public var type:String;
 		public var color:String;
 		private var smokeCurce:Effect;
+		private var ingredient1Color:String = "0x7F7F7F";
+		private var ingredient2Color:String = "0x7F7F7F";
+		private var ingredient3Color:String = "0x7F7F7F";
 		public function Potion(pType:String, pColor1:String, pColor2:String = "0x7F7F7F",pColor3:String = "0x7F7F7F") 
 		{
 			super("Player");
-			init(Mixer.getInstance().getPotionContainer(), Monster.getInstance(), Math.random() * 280 - 140, 0, 0, 0.6, 120);
+			ingredient1Color = pColor1;
+			ingredient2Color = pColor2;
+			ingredient3Color = pColor3;
+			init(Mixer.getInstance().getPotionContainer(), Monstre.getInstance(), Math.random() * 280 - 140, 0, 0, 0.6, 120);
 			type = pType;
 			color = ColorManager.setColor(this, pColor1, pColor2, pColor3);
 			trace("Potion color is "+color);
@@ -31,7 +37,7 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		override protected function onDragToTarget():void {
-			Monster.getInstance().usePotion(this);
+			Monstre.getInstance().usePotion(this);
 			willGoBack = false;
 			willBeDestroyed = true;
 			Mixer.getInstance().potionUsed();
@@ -59,6 +65,25 @@ package com.monsterlab.game.gameobjects.sprites
 			var eff:Effect = new Effect("Bullet");
 			eff.init_rotateAndTransit( x+Math.random() *32-16, y-90, 0, 72, 0, -2);
 			Mixer.getInstance().getPotionContainer().addChild(eff);
+		}
+		
+		public function compareRecette():Boolean {
+			//TODO
+			if (Recipe.recipeList.length == 0)
+				return false;
+			for each(var recipe:Recipe in Recipe.recipeList) {
+				if (recipe.recipeIngredients.length == 0)
+					continue;
+				var result:Boolean = true;
+				for each(var colorName:String in recipe.recipeIngredients) {
+					if (colorName != ingredient1Color || colorName != ingredient2Color|| colorName != ingredient3Color) {
+						result = false;
+					}
+				}
+				if (result)
+					return true;
+			}
+			return false;
 		}
 	}
 
