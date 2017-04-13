@@ -21,6 +21,7 @@ package com.monsterlab.ui.screens
 		public var Recipe2:MovieClip;
 		public var Recipe3:MovieClip;
 		public var mcRecipe:MovieClip;
+		public var mcConveyor:MovieClip;
 		
 		/**
 		 * instance unique de la classe Hud

@@ -114,14 +114,7 @@ package com.monsterlab.game.gameobjects {
 			
 			if (anim.totalFrames>1) anim.gotoAndPlay(pStart);
 			
-			if (multiBoxes || box==null) {
-				lClass = getDefinitionByName(assetName+ (multiBoxes ? "_" + pState+BOX_SUFFIX : BOX_SUFFIX)) as Class;
-				
-				box = new lClass();
-				if (boxAlpha== 0) box.visible = false;
-				else box.alpha = boxAlpha;
-				addChild (box);	
-			}
+			
 			
 			state = pState;
 			
