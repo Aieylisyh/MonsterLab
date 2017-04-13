@@ -44,9 +44,9 @@ package com.utils
 			var channel:SoundChannel = snd.play(0,loopTime,soundTransform);
 			if (channel != null) {
 				sound_sfxs.push(channel)
-				return -1;
+				return sound_sfxs.length-1;
 			}
-			return sound_sfxs.length-1;
+			return -1;
 		}
 		
 		public function stopSound(index:int):Boolean {

@@ -53,7 +53,7 @@ package com.monsterlab.game.gameobjects.sprites {
 			start();
 		}
 		
-		private function init_common(pX:Number, pY:Number, pRotation:Number = 0, pLifeTime:Number =-1):void {
+		public function init_common(pX:Number, pY:Number, pRotation:Number = 0, pLifeTime:Number =-1):void {
 			var ClassReference:Class = getDefinitionByName(assetName) as Class;
             graphic = new ClassReference();
 			if (graphic.totalFrames < 2) {
@@ -118,7 +118,9 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		
 		public function setEnd_ingradient_mixAnimation():void {
-			
+			if (myTraget == ENUM_Trajet_ingradient_mixAnimation) {
+				lifeTimeCount = ingradient_mixAnimation_goBackTime;
+			}
 		}
 		
 		protected function voidFunction():void {}

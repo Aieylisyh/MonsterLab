@@ -38,6 +38,7 @@ package com.monsterlab.game.gameobjects.sprites
 		public var isDraging:Boolean = false;
 		private var mixerRadius:Number  = 250;
 		private var mixerDragFactor:Number  = 1;
+		public static var MAXROTATIONSPEED:int = 25;
 		//private var text1:TextField;
 		//private var text2:TextField;
 		private var lastPos:Point;
@@ -102,7 +103,7 @@ package com.monsterlab.game.gameobjects.sprites
 				//text1.text = Math.floor(movement.x).toString() + "," +Math.floor(movement.y).toString();
                 var cross:Number = movement.x * relativePos.y - movement.y * relativePos.x;
 				//text2.text = cross.toString();
-                host.setSpeed(Math.max(Math.min(-cross * 0.02, 25), -25));
+                host.setSpeed(Math.max(Math.min(-cross * 0.02, MAXROTATIONSPEED), -MAXROTATIONSPEED));
 			}
 			else
 			{

@@ -82,7 +82,6 @@ package com.monsterlab.game.gameobjects
 			//generate a bitmap and add it to the gameobject, return the Sprite if necessary, example:Player should take a mcShoot from the Sprite
 			//w h are the width and height of the sprite in flash, alignX and alignY is 0:left top 1:center center 2:right bottom
 			//i haven't test alignX alignY with 0 and 2, so if you meet a bug, try find this here
-			
 			//using cache to save BitmapData.if the name is exactly the same, will use from cache;
 			
 			var myBitmapData:BitmapData;
@@ -110,6 +109,7 @@ package com.monsterlab.game.gameobjects
 			bmp.x = -w * (alignX * 0.5);
 			bmp.y = -h * (alignY * 0.5);
 			addChild(bmp);
+			graphic.cacheAsBitmap = true; 
 			//trace(cachedBmp[className]);
 			//trace(cachedBmp["foo"]==null);
 			return graphic;
