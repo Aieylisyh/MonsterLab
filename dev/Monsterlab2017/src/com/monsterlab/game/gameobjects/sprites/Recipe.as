@@ -55,7 +55,7 @@ package com.monsterlab.game.gameobjects.sprites
 			var lArray:Vector.<Vector.<String>> = new Vector.<Vector.<String>>();
 			var lLength:int = pList.length;
 			trace(lLength);
-			for (var i:int = 1; i < pNum; i++) {
+			for (var i:int = 0; i < pNum; i++) {
 				var lIngredient:Vector.<String> = pList[Math.floor(Math.random() * lLength)];
 				if (lArray.length == 0) lArray.push(lIngredient);
 				else {

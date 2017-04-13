@@ -2,6 +2,7 @@ package com.monsterlab
 {
 	import com.monsterlab.game.gameobjects.sprites.Button;
 	import com.monsterlab.game.gameobjects.sprites.Ingredient;
+	import com.monsterlab.game.gameobjects.sprites.IngredientContainer;
 	import com.monsterlab.game.gameobjects.sprites.Player;
 	import com.monsterlab.game.gameobjects.sprites.Recipe;
 	import com.monsterlab.ui.UIManager;
@@ -21,16 +22,14 @@ package com.monsterlab
 		public var btnTestAnim:Button;
 		private var isPaused:Boolean;
 		
-		private var spawnTimer:int = 800;
-		public var spawnFrame:int = 800;
+		private var spawnTimer:int = 125;
+		public var spawnFrame:int = 125;
 		
 		public function spawn():void {
-			Recipe.initIngredientList();
-			//var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
-			//trace(lInfos);
-			var pEffet:Effect	 = new Effect("Explosion12");
-			pEffet.init_float(GameStage.MID_H, GameStage.MID_V * 1.4, 0, 99999, 150, 100, 0);//must not be scaled!
-			new Ingredient(Math.floor(Math.random() *7), pEffet);
+			
+			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
+			var lContainer:IngredientContainer	 = new IngredientContainer("Explosion12");
+			new Ingredient(-1, lContainer, lInfos[0], lInfos[1]);
 		}
 		
 		public function GameManager() 
@@ -61,7 +60,7 @@ package com.monsterlab
 			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
 			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
 			GameStage.getInstance().getGameContainer_2().addChild(Hud.getInstance());
-			spawn();
+			Recipe.initIngredientList();
 		}
 		
 		private var i:int = 0;
@@ -79,12 +78,14 @@ package com.monsterlab
 					obj.doAction();
 				}
 				
-				if (spawnTimer == spawnFrame) {
-					//spawn ();
-					spawnTimer = 0;
-				}else {
-					spawnTimer += 1;
-				}
+				
+			} 
+			
+			if (spawnTimer == spawnFrame) {
+				spawn();
+				spawnTimer = 0;
+			}else {
+				spawnTimer += 1;
 			}
 		}
 		

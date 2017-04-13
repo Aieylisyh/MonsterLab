@@ -62,8 +62,14 @@ package com.monsterlab.game.gameobjects.sprites
 		{
 			super("Ingredient_default");
 			init(pContainer, Mixer.getInstance(), pX, pY, 0, 1, 80, 75);
-			type = (Ingredient.INGREDIENTS_TYPE[pIngredientID])[0];
-			color = (Ingredient.INGREDIENTS_TYPE[pIngredientID])[1];
+			if (pIngredientID ==-1) {
+				type = pType;
+				color = pColor;
+			}else {
+				type = (Ingredient.INGREDIENTS_TYPE[pIngredientID])[0];
+				color = (Ingredient.INGREDIENTS_TYPE[pIngredientID])[1];
+			}
+			
 			ColorManager.setColor(this, color);
 			//trace("Ingredient color is " + color);
 			pContainer.addChild(this);

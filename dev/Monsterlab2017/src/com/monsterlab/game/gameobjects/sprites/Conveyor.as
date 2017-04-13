@@ -1,5 +1,6 @@
 package com.monsterlab.game.gameobjects.sprites 
 {
+	import com.monsterlab.GameStage;
 	import com.monsterlab.game.gameobjects.GameObject;
 	import flash.display.MovieClip;
 	
@@ -31,7 +32,14 @@ package com.monsterlab.game.gameobjects.sprites
 		public function Conveyor() 
 		{
 			super();
+			mouseChildren = false;
+			mouseEnabled = false;
 			trace ("coucou");
+			var lCouvercle:Couvercle = new Couvercle();
+			GameStage.getInstance().getGameContainer_5().addChild(lCouvercle);
+			lCouvercle.x = 683;
+			lCouvercle.y = GameStage.MID_V * 1.6515;
+			trace("okay");
 			
 		}
 		
