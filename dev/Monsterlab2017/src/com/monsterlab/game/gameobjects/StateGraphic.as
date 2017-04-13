@@ -128,7 +128,7 @@ package com.monsterlab.game.gameobjects {
 			if (state != null) {
 				anim.stop();
 				removeChild(anim);
-				if (pDestroy || multiBoxes) removeChild(box);
+				//if (pDestroy || multiBoxes) removeChild(box);
 			}
 			state = null;
 		}

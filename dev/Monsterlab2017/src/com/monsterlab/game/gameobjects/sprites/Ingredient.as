@@ -1,5 +1,7 @@
 package com.monsterlab.game.gameobjects.sprites 
 {
+	import com.monsterlab.GameStage;
+	import com.monsterlab.game.gameobjects.GameObject;
 	import com.monsterlab.game.gameobjects.StateGraphic;
 	import flash.display.DisplayObject;
 	import com.monsterlab.GameStage;
@@ -12,7 +14,7 @@ package com.monsterlab.game.gameobjects.sprites
 	 */
 	public class Ingredient extends DragDropTarget 
 	{
-		public static const INGREDIENTS_LIST:Vector.<Vector.<String>> = new <Vector.<String>>[
+		public static const INGREDIENTS_TYPE:Vector.<Vector.<String>> = new <Vector.<String>>[
 			new <String>["chauvante", "0x000000"],
 			new <String>["calimero", "0xFF0000"],
 			new <String>["pousume", "0x0000FF"],
@@ -53,6 +55,7 @@ package com.monsterlab.game.gameobjects.sprites
 			new <String>["balonCosmique", "0x0000FF"],
 			new <String>["planteElegante", "0x0000FF"]
 		];
+
 		public var type:String;
 		public var color:String;
 		
@@ -60,8 +63,14 @@ package com.monsterlab.game.gameobjects.sprites
 		{
 			super("Ingredient_default");
 			init(pContainer, Mixer.getInstance(), pX, pY, 0, 1, 80, 75);
-			type = (Ingredient.INGREDIENTS_LIST[pIngredientID])[0];
-			color = (Ingredient.INGREDIENTS_LIST[pIngredientID])[1];
+			if (pIngredientID ==-1) {
+				type = pType;
+				color = pColor;
+			}else {
+				type = (Ingredient.INGREDIENTS_TYPE[pIngredientID])[0];
+				color = (Ingredient.INGREDIENTS_TYPE[pIngredientID])[1];
+			}
+			
 			ColorManager.setColor(this, color);
 			//trace("Ingredient color is " + color);
 			pContainer.addChild(this);
@@ -80,6 +89,12 @@ package com.monsterlab.game.gameobjects.sprites
 		override protected function doActionNormal():void 
 		{
 			super.doActionNormal();
+			/*x += Conveyor.speed;
+			if (x > GameStage.SAFE_ZONE_WIDTH) {
+				//parent.removeChild(this);
+				GameObject.list.splice(GameObject.list.indexOf(this), 1);
+				this.destroy();
+			}*/
 		}
 		
 		override protected function idleFunction():void {
