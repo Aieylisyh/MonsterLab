@@ -2,6 +2,7 @@ package com.monsterlab {
 	
 	import com.Main;
 	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.game.gameobjects.sprites.Ingredient;
 	import com.monsterlab.ui.screens.Hud;
 	import com.monsterlab.ui.screens.PauseScreen;
 	import com.monsterlab.ui.UIManager;
@@ -9,6 +10,7 @@ package com.monsterlab {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.geom.Point;
+	import flash.text.TextField;
 
 	public class GameStage extends Sprite 
 	{
@@ -101,13 +103,17 @@ package com.monsterlab {
 			
 			popinContainer = new Sprite();//popin maybe never used
 			addChild(popinContainer);
-			popinContainer.x = MID_H;
-			popinContainer.y = MID_V;
+			popinContainer.x = MID_V;
+			popinContainer.y = MID_H;
 			
 			Config.stage.addEventListener(Event.RESIZE, resize);
 			resize();
 			
 			pCallBack();
+			
+			
+			
+			
 			
 		}
 		

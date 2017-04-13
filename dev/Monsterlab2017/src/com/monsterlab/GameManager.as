@@ -1,7 +1,9 @@
 package com.monsterlab 
 {
 	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.game.gameobjects.sprites.Ingredient;
 	import com.monsterlab.game.gameobjects.sprites.Player;
+	import com.monsterlab.game.gameobjects.sprites.Recipe;
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
 	import com.monsterlab.game.gameobjects.sprites.Effect;
@@ -18,9 +20,22 @@ package com.monsterlab
 		protected static var instance: GameManager;
 		public var btnTestAnim:Button;
 		private var isPaused:Boolean;
+		
+		private var spawnTimer:int = 0;
+		public var spawnFrame:int = 80;
+		
+		public function spawn():void {
+			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
+			var lIngredient:Ingredient = new Ingredient();
+			lIngredient.init(lInfos[0], lInfos[1]);
+			//Le replacer en fonction de la position du spawner
+			lIngredient.startMove();
+		}
+		
 		public function GameManager() 
 		{
 		}
+		
 		public static function getInstance (): GameManager {
 			if (instance == null) instance = new GameManager();
 			return instance;
@@ -47,6 +62,10 @@ package com.monsterlab
 			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
 			GameStage.getInstance().getGameContainer_4().addChild(Hud.getInstance());
 			testDrag();
+			//Recipe.initIngredientList();
+			var lIngredient:Ingredient = new Ingredient();
+			GameStage.getInstance().getGameContainer_5().addChild(lIngredient);
+			lIngredient.startMove();
 		}
 		
 		private var i:int = 0;
@@ -80,6 +99,7 @@ package com.monsterlab
 				}else {
 					obj.doAction();
 				}
+				
 			}
 		}
 		

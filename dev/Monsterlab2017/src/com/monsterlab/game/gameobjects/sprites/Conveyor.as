@@ -13,6 +13,9 @@ package com.monsterlab.game.gameobjects.sprites
 		 * instance unique de la classe Conveyor
 		 */
 		protected static var instance: Conveyor;
+		
+		public static var speed:int = 3;
+		
 
 		/**
 		 * Retourne l'instance unique de la classe, et la crée si elle n'existait pas au préalable
@@ -29,10 +32,14 @@ package com.monsterlab.game.gameobjects.sprites
 			
 		}
 		
+		public function increaseSpeed():void {
+			speed += 2;
+		}
+		
 		/**
 		 * détruit l'instance unique et met sa référence interne à null
 		 */
-		public function destroy (): void {
+		override public function destroy (): void {
 			instance = null;
 		}
 
