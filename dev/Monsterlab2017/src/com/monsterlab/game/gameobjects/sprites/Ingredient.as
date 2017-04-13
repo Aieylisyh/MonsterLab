@@ -10,7 +10,7 @@ package com.monsterlab.game.gameobjects.sprites
 	public class Ingredient extends StateGraphic 
 	{
 		public static const INGREDIENTS_LIST:Vector.<Vector.<String>> = new Vector.<Vector.<String>>([
-			["chauvante", ""],
+			["chauvante", "0x000000"],
 			["calimero", ""],
 			["pousume", ""],
 			["rasticot", ""],
@@ -51,6 +51,8 @@ package com.monsterlab.game.gameobjects.sprites
 			["planteElegante", ""]
 		]);
 		
+		 
+		
 		public var type:String;
 		public var color:String;
 		
@@ -60,12 +62,12 @@ package com.monsterlab.game.gameobjects.sprites
 			
 		}
 		
-		/*private function init(pIngredient:String, pColor:String):void {
+		public function init(pIngredient:String, pColor:String):void {
 			setState(pIngredient);
 			type = pIngredient;
 			color = pColor;
 			
-		}*/
+		}
 		
 		public function startMove():void {
 			setModeNormal();

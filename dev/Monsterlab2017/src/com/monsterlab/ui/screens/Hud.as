@@ -1,5 +1,6 @@
 package com.monsterlab.ui.screens 
 {
+	import com.monsterlab.GameManager;
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.Screen;
 	import com.monsterlab.ui.UIManager;
@@ -57,7 +58,7 @@ package com.monsterlab.ui.screens
 		}
 		
 		private function onClickPause(pEvent:MouseEvent):void {
-			//GameManger.getInstance().onPause();
+			GameManager.getInstance().onPause();
 			UIManager.getInstance().addScreen(PauseScreen.getInstance());
 		}
 		
