@@ -1,6 +1,7 @@
 package com.monsterlab.game.gameobjects.sprites 
 {
 	import com.monsterlab.game.gameobjects.GameObject;
+	import flash.display.MovieClip;
 	
 	/**
 	 * ...
@@ -15,6 +16,7 @@ package com.monsterlab.game.gameobjects.sprites
 		protected static var instance: Conveyor;
 		
 		public static var speed:int = 3;
+		public var mcTapis:MovieClip;
 		
 
 		/**
@@ -29,6 +31,7 @@ package com.monsterlab.game.gameobjects.sprites
 		public function Conveyor() 
 		{
 			super();
+			trace ("coucou");
 			
 		}
 		
