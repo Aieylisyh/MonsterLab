@@ -19,7 +19,6 @@ package com.monsterlab.game.gameobjects.sprites {
 		private var assetName:String;
 		private var graphic:MovieClip;
 		private var speed:Point = new Point(0, 0);
-		private var idleFunction:Function = voidFunction;
 		//private var rotationSpeed:Number = 0;
 		//private var rotationAcc:Number = 0;
 		private var startingX:Number;
@@ -146,12 +145,8 @@ package com.monsterlab.game.gameobjects.sprites {
 				y = (e.stageY-startingMouseY)/GameStage.getInstance().scaleY+startingY_drag;
 			}
 		}
-		protected function voidFunction():void {}
-		
-		protected function tragetFunction_rotate():void {
-			//this.rotation += rotationSpeed;
-			//rotationSpeed += rotationAcc;
-		}
+		protected function dragingFunction():void {}
+		protected function idleFunction():void { }
 		
 		override protected function doActionNormal (): void {
 			super.doActionNormal();
@@ -179,6 +174,8 @@ package com.monsterlab.game.gameobjects.sprites {
 					//trace(x+"  "+y);
 				}else if (!isDraging && canBeDragged) {
 					idleFunction();
+				}else if (isDraging) {
+					dragingFunction();
 				}
 			}
 		}

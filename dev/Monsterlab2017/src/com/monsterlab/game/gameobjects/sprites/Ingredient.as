@@ -5,6 +5,7 @@ package com.monsterlab.game.gameobjects.sprites
 	import com.monsterlab.GameStage;
 	import flash.display.Sprite;
 	import com.monsterlab.ui.ColorManager;
+	import com.utils.FMath;
 	/**
 	 * ...
 	 * @author COQUERELLE Killian
@@ -79,6 +80,25 @@ package com.monsterlab.game.gameobjects.sprites
 		override protected function doActionNormal():void 
 		{
 			super.doActionNormal();
+		}
+		
+		override protected function idleFunction():void {
+			//this.rotation += rotationSpeed;
+			//rotationSpeed += rotationAcc;
+		}
+		
+		override protected function dragingFunction():void {
+			if (Math.random() > 0.3)
+				return;
+			var eff:Effect = new Effect("Bullet");
+			var t:Number = Math.random() * 360;
+			eff.init_rotateAndTransit(0, -10, 0, 50+Math.random() *22, 1.5*FMath.xFactorByRotation(t), 1.5*FMath.yFactorByRotation(t), 4);
+			ColorManager.setColor(eff, color);
+			this.addChildAt(eff,1);
+		}
+		
+		private function drawHeart():void {
+			
 		}
 	}
 }

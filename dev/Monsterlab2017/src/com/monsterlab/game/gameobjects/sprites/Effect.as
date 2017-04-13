@@ -46,6 +46,7 @@ package com.monsterlab.game.gameobjects.sprites {
 		private static const ENUM_Trajet_ingradient_mixAnimation:int = 3;
 		private static const ENUM_Trajet_heartCurve:int = 4;
 		private var myTraget:int;
+		public var isDestroyed:Boolean = false;
 		public function Effect(pName:String) 
 		{
 			super();
@@ -54,11 +55,15 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		
 		public function init_common(pX:Number, pY:Number, pRotation:Number = 0, pLifeTime:Number =-1):void {
-			var ClassReference:Class = getDefinitionByName(assetName) as Class;
-            graphic = new ClassReference();
-			if (graphic.totalFrames < 2) {
-				graphic.cacheAsBitmap = true; 
-				//graphic.cacheAsBitmapMatrix = new Matrix();
+			if (assetName != "") {
+				var ClassReference:Class = getDefinitionByName(assetName) as Class;
+				graphic = new ClassReference();
+				if (graphic.totalFrames < 2) {
+					graphic.cacheAsBitmap = true; 
+					//graphic.cacheAsBitmapMatrix = new Matrix();
+				}
+			}else {
+				graphic = new MovieClip();
 			}
 			addChild(graphic);
             GameStage.getInstance().getGameContainer_5().addChild(this);
@@ -77,6 +82,8 @@ package com.monsterlab.game.gameobjects.sprites {
 			init_common(pX, pY, pRotation, pLifeTime);
 			this.x = pX;
 			this.y = pY;
+			speed.x = vX;
+			speed.y = vY;
 			this.rotationSpeed = pRotationSpeed;
 			this.rotationAcc = pRotationAcc;
 			this.accX = pAccX;
@@ -200,6 +207,7 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		override public function destroy():void
 		{
+			isDestroyed = true;
 			removeChild(graphic);
 			graphic = null;
 			super.destroy();
