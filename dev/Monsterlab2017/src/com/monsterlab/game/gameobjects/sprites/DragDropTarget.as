@@ -131,7 +131,7 @@ package com.monsterlab.game.gameobjects.sprites {
 		}
 		
 		protected function onDragToTarget():void {
-			 if (Mixer.getInstance().addIngredient(/*??????*/)) {
+			 if (Mixer.getInstance().addIngredient(null)) {
 				willGoBack = false;
 				willBeDestroyed = true;
 			}else {

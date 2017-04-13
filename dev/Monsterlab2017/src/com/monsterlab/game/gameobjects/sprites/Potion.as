@@ -7,6 +7,7 @@ package com.monsterlab.game.gameobjects.sprites
 		import flash.geom.Point;
 		import flash.media.Sound;
 		import com.monsterlab.GameStage;
+		import com.monsterlab.ui.ColorManager;
 	/**
 	 * ...
 	 * @author Song Huang
@@ -16,24 +17,21 @@ package com.monsterlab.game.gameobjects.sprites
 		public var type:String;
 		public var color:String;
 
-		public function Potion(pType:String, pColor:String) 
+		public function Potion(pType:String, pColor1:String, pColor2:String = "0x7F7F7F",pColor3:String = "0x7F7F7F") 
 		{
 			super("Player");
-			init(Mixer.getInstance().getPotionContainer(), Monster.getInstance(), Math.random() * 360 - 180, Math.random() * 200 - 100, 0, 0.6, 120);
+			init(Mixer.getInstance().getPotionContainer(), Monster.getInstance(), Math.random() * 280 - 140, 0, 0, 0.6, 120);
 			type = pType;
-			color = pColor;
-			setColor();
+			color = ColorManager.setColor(this, pColor1, pColor2, pColor3);
+			trace("Potion color is "+color);
 			Mixer.getInstance().getPotionContainer().addChild(this);
-		}
-		
-		private function setColor():void {
-			
 		}
 		
 		override protected function onDragToTarget():void {
 			Monster.getInstance().usePotion(this);
 			willGoBack = false;
 			willBeDestroyed = true;
+			Mixer.getInstance().potionUsed();
 		}
 	}
 
