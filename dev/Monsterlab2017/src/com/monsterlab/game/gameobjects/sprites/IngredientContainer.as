@@ -19,7 +19,7 @@ package com.monsterlab.game.gameobjects.sprites
 		{
 			super();
 			x = 1400;
-			y = GameStage.MID_V * 1.4;
+			y = GameStage.MID_V * 1.365;
 			start();
 			var ClassReference:Class = getDefinitionByName(pName) as Class;
             graphic = new ClassReference();

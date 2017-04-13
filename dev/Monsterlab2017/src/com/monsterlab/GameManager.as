@@ -29,7 +29,7 @@ package com.monsterlab
 			
 			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
 			var lContainer:IngredientContainer	 = new IngredientContainer("Explosion12");
-			new Ingredient(-1, lContainer, lInfos[0], lInfos[1]);
+			new Ingredient(-1, lContainer, true, lInfos[0], lInfos[1]);
 		}
 		
 		public function GameManager() 
