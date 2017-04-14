@@ -47,6 +47,7 @@ package com.monsterlab {
 		 * conteneur des écrans d'interface
 		 */
 		protected var screensContainer:Sprite;
+		protected var titleCardContainer:Sprite;
 		
 		/**
 		 * conteneur du jeu
@@ -95,6 +96,11 @@ package com.monsterlab {
 			addChild(hudContainer);
 			hudContainer.x = MID_H;
 			hudContainer.y = MID_V;
+			
+			titleCardContainer = new Sprite();
+			addChild(titleCardContainer);//screen
+			titleCardContainer.x = MID_H;
+			titleCardContainer.y = MID_V;
 			
 			screensContainer = new Sprite();
 			addChild(screensContainer);//screen
@@ -168,6 +174,10 @@ package com.monsterlab {
 		 */
 		public function getScreensContainer (): Sprite {
 			return screensContainer;
+		}
+		
+		public function getTitleCardContainer (): Sprite {
+			return titleCardContainer;
 		}
 		
 		/**

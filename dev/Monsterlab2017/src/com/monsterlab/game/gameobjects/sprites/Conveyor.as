@@ -34,13 +34,15 @@ package com.monsterlab.game.gameobjects.sprites
 			super();
 			mouseChildren = false;
 			mouseEnabled = false;
+		}
+		
+		public static function setCouvercle():void {
 			trace ("coucou");
 			var lCouvercle:Couvercle = new Couvercle();
 			GameStage.getInstance().getGameContainer_5().addChild(lCouvercle);
 			lCouvercle.x = 683;
 			lCouvercle.y = GameStage.MID_V * 1.6515;
 			trace("okay");
-			
 		}
 		
 		public function increaseSpeed():void {

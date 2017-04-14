@@ -33,7 +33,7 @@ package com.monsterlab
 				createRecipe();
 			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
 			var lContainer:IngredientContainer	 = new IngredientContainer();
-			lContainer.myIngredient = new Ingredient( -1, lContainer, false, lInfos[0], lInfos[1]);
+			lContainer.myIngredient = new Ingredient( -1, lContainer, true, lInfos[0], lInfos[1]);
 		}
 		
 		public function GameManager() 
@@ -50,7 +50,8 @@ package com.monsterlab
 		public function init():void {
 			//for first run this game
 			trace("GameManager is running fine");
-			UIManager.getInstance().addScreen(TitleCard.getInstance());
+			UIManager.getInstance().closeScreens();
+			GameStage.getInstance().getTitleCardContainer().addChild(TitleCard.getInstance());
 		}
 		
 		
@@ -59,6 +60,7 @@ package com.monsterlab
 			isPaused = false;
 			trace("GameManager startGame is running fine");
 			UIManager.getInstance().closeScreens();
+			GameStage.getInstance().getTitleCardContainer().removeChild(TitleCard.getInstance());
 			GameStage.getInstance().addInterFace();
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
 			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
@@ -126,6 +128,7 @@ package com.monsterlab
 			GameStage.getInstance().getGameContainer_5().removeChild(Mixer.getInstance());
 			GameStage.getInstance().removeEventListener(Event.ENTER_FRAME, gameLoop);
 			GameStage.getInstance().getGameContainer_5().removeChild(Hud.getInstance());
+			Ingredient.destroyAll();
 		}
 		
 		private function gameover():void {

@@ -26,6 +26,7 @@ package com.monsterlab.ui.screens
 		public var mcRecipe:MovieClip;
 		public var mcConveyor:MovieClip;
 		public var hudPart:MovieClip;
+		public var scoreBar:TextField;
 		/**
 		 * instance unique de la classe Hud
 		 */
@@ -45,6 +46,11 @@ package com.monsterlab.ui.screens
 			super();
 			x = GameStage.MID_H;
 			y = GameStage.MID_V;
+			hudPart.hudTop.x = 0;
+			hudPart.hudTop.y = hudPart.hudTop.height / 2 - GameStage.MID_V;
+			
+			hudPart.hudBottom.x = 2;
+			hudPart.hudBottom.y = -hudPart.hudBottom.height/2+(2430-2048)/2+GameStage.MID_V - 12;
 		}
 		
 		public function getLiquidContainer():DisplayObjectContainer {
@@ -79,6 +85,10 @@ package com.monsterlab.ui.screens
 		override protected function addListeners():void 
 		{
 			super.addListeners();
+			btnPause = hudPart.hudTop.btnPause;
+			scoreBar = hudPart.hudTop.scoreBar.score;
+			scoreBar.text = "10";
+			trace(scoreBar.text);
 			btnPause.addEventListener(MouseEvent.CLICK, onClickPause);
 		}
 		
