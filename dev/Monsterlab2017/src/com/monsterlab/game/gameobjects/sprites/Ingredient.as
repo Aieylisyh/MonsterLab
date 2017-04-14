@@ -113,7 +113,7 @@ package com.monsterlab.game.gameobjects.sprites
 		override protected function dragingFunction():void {
 			if (Math.random() > 0.3)
 				return;
-			var eff:Effect = new Effect("Bullet");
+			var eff:Effect = new Effect("particle_whiteball");
 			var t:Number = Math.random() * 360;
 			eff.init_rotateAndTransit(0, -10, 0, 50+Math.random() *22, 1.5*FMath.xFactorByRotation(t), 1.5*FMath.yFactorByRotation(t), 4);
 			ColorManager.setColor(eff, color);

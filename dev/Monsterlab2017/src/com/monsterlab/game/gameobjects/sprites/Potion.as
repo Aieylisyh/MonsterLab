@@ -46,7 +46,7 @@ package com.monsterlab.game.gameobjects.sprites
 		override protected function dragingFunction():void {
 			if (Math.random() > 0.05)
 				return;
-			var eff:Effect = new Effect("Bullet");
+			var eff:Effect = new Effect("particle_drop");
 			eff.init_rotateAndTransit( Math.random() *120-60, 55, 0, 24+Math.random() *30, 0, 0, 0,0,0,0.3);
 			ColorManager.setColor(eff, color);
 			this.addChildAt(eff,1);
@@ -56,13 +56,13 @@ package com.monsterlab.game.gameobjects.sprites
 			if (smokeCurce != null && smokeCurce.isDestroyed)
 				smokeCurce = null;
 			if (smokeCurce != null && Math.random() > 0.6) {
-				var eff0:Effect = new Effect("Bullet");
+				var eff0:Effect = new Effect("particle_smoke");
 				eff0.init_rotateAndTransit( smokeCurce.x + x, smokeCurce.y + y, 0, 72, 0, -2);
 				Mixer.getInstance().getPotionContainer().addChild(eff0);
 			}
 			if (Math.random() > 0.04)
 				return;
-			var eff:Effect = new Effect("Bullet");
+			var eff:Effect = new Effect("particle_smoke");
 			eff.init_rotateAndTransit( x+Math.random() *32-16, y-90, 0, 72, 0, -2);
 			Mixer.getInstance().getPotionContainer().addChild(eff);
 		}
