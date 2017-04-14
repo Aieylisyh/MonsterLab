@@ -40,8 +40,8 @@ package com.monsterlab.game.gameobjects.sprites
 			super();
 			scienstState = SCIENTISTSTATE_PHASE1;
 			GameStage.getInstance().getGameContainer_3().addChild(this);
-			this.x = GameStage.MID_H+490;
-			this.y = GameStage.MID_V-240;
+			this.x = GameStage.MID_H+498;
+			this.y = GameStage.MID_V-269;
 		}
 		
 		public function feedbackByMonster(state:String):void {

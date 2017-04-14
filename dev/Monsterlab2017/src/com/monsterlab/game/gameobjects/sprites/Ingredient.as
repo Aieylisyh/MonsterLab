@@ -81,7 +81,7 @@ package com.monsterlab.game.gameobjects.sprites
 					assetName = "Ingredient_" + type;
 				}
 			}
-			init(pContainer, Mixer.getInstance(), pX, pY, 0, 1, 80, 75);
+			init(pContainer, Mixer.getInstance(), pX, pY, 0, 1,130, 85);
 			ColorManager.setColor(this, color);
 			//trace("Ingredient color is " + color);
 			pContainer.addChild(this);

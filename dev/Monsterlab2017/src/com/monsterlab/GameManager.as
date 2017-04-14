@@ -74,7 +74,7 @@ package com.monsterlab
 		}
 		
 		private function createRecipe():void {
-			SoundManager.getInstance().makeSound("sound_gaz");
+			SoundManager.getInstance().makeSound("sound_gaz",1,0.5);
 			var id:int = RecipeGraphic.findEmptyContainerID();
 			trace("!id!"+id);
 			if (id < 0)
@@ -127,7 +127,10 @@ package com.monsterlab
 		public function reset():void {
 			GameStage.getInstance().getGameContainer_5().removeChild(Mixer.getInstance());
 			GameStage.getInstance().removeEventListener(Event.ENTER_FRAME, gameLoop);
-			GameStage.getInstance().getGameContainer_5().removeChild(Hud.getInstance());
+			if (Hud.getInstance()["parent"] != null)
+			{
+				Hud.getInstance().parent.removeChild(Hud.getInstance());
+			}
 			Ingredient.destroyAll();
 		}
 		

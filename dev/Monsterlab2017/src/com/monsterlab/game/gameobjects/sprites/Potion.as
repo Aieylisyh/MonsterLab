@@ -82,7 +82,7 @@ package com.monsterlab.game.gameobjects.sprites
 					continue;
 				var result:Boolean = true;
 				for each(var colorName:Vector.<String> in recipe.recipeIngredients) {
-					if (colorName[1]!= ingredient1Color || colorName[1] != ingredient2Color|| colorName[1] != ingredient3Color) {
+					if (colorName[1]!= ingredient1Color  && (colorName[1] != ingredient2Color && ingredient2Color!="0x7F7F7F")&& (colorName[1] != ingredient3Color&& ingredient3Color!="0x7F7F7F")) {
 						result = false;
 					}
 				}
