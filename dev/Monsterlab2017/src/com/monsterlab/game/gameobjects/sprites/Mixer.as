@@ -146,7 +146,7 @@ package com.monsterlab.game.gameobjects.sprites
 			if (mySoundIndex >-1) {
 				SoundManager.getInstance().stopSound(mySoundIndex);
 			}
-			mySoundIndex = SoundManager.getInstance().makeSound ("sound_mixer",99);
+			mySoundIndex = SoundManager.getInstance().makeSound ("sound_mixer",1);
 			if (ingredients.length>0/*????*/) {
 				//liquideAnimation.setColor(?????);
 				startEffects();

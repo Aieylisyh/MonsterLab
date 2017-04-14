@@ -31,6 +31,7 @@ package com.monsterlab.game.gameobjects.sprites
 		
 		private var frameToMutate:int = 600;
 		private var frameToMutate_count:int;
+		private var smokeCurce:Effect;
 		public function Monstre() 
 		{
 			skip = true;
@@ -40,8 +41,8 @@ package com.monsterlab.game.gameobjects.sprites
 			start();
 			handleNewMonsterState(MONSTERSTATE_PHASE1);
 			GameStage.getInstance().getGameContainer_3().addChild(this);
-			this.x = GameStage.MID_H-100;
-			this.y = GameStage.MID_V-50;
+			this.x = GameStage.MID_H-210;
+			this.y = GameStage.MID_V+165;
 			//setState("phase1");
 		}
 		
@@ -58,11 +59,14 @@ package com.monsterlab.game.gameobjects.sprites
 			trace("green " + red);
 			trace("blue " + red);*/
 			trace("!!!!usePotion");
-			if (pPotion.compareRecette()) {
-				var newState:String = getNewMonsterState();
-				handleNewMonsterState(newState);
+			if (!pPotion.compareRecette()) {
+				accelerateMutation();
+			}else {
+				decelerateMutation();	
 			}
-			Scientist.getInstance().feedbackByMonster(newState);
+			smokeCurce = new Effect("");
+			smokeCurce.init_heartCurve(0, 0, 0, 60, 1, 15);
+			this.addChild(smokeCurce);
 		}
 		
 		private function getNewMonsterState():String {
@@ -109,6 +113,7 @@ package com.monsterlab.game.gameobjects.sprites
 			assetName = "Monstre" + ID.toString();
 			monsterState = newState;
 			setState(monsterState);
+			Scientist.getInstance().feedbackByMonster(monsterState);
 			SoundManager.getInstance().makeSound("sound_monster"+(Math.floor(Math.random()*6+1)).toString());
 		}
 		
@@ -129,6 +134,14 @@ package com.monsterlab.game.gameobjects.sprites
 		
 		override protected function doActionNormal():void
 		{
+			if (smokeCurce != null && smokeCurce.isDestroyed)
+				smokeCurce = null;
+			if (smokeCurce != null && Math.random() > 0.66) {
+				var eff0:Effect = new Effect("particle_smoke");
+				eff0.init_rotateAndTransit( smokeCurce.x , smokeCurce.y , 0, 72, 0, -2);
+				eff0.scaleY = eff0.scaleX = 2;
+				addChild(eff0);
+			}
 			super.doActionNormal();
 			frameToMutate_count--;
 			if (frameToMutate_count < 0) {

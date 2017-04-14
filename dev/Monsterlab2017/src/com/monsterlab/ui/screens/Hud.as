@@ -50,7 +50,12 @@ package com.monsterlab.ui.screens
 			hudPart.hudTop.y = hudPart.hudTop.height / 2 - GameStage.MID_V;
 			
 			hudPart.hudBottom.x = 2;
-			hudPart.hudBottom.y = -hudPart.hudBottom.height/2+(2430-2048)/2+GameStage.MID_V - 12;
+			hudPart.hudBottom.y = -hudPart.hudBottom.height / 2 + (2430 - 2048) / 2 + GameStage.MID_V - 12;
+			var hudPart1:DisplayObjectContainer = DisplayObjectContainer(this.getChildAt(1));
+			hudPart1.getChildAt(2).y-=255;
+			hudPart1.getChildAt(3).y-=255;
+			hudPart1.getChildAt(4).y-=255;
+			hudPart1.getChildAt(5).y-=255;
 		}
 		
 		public function getLiquidContainer():DisplayObjectContainer {
