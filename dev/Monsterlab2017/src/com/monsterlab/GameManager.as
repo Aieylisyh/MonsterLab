@@ -2,6 +2,7 @@ package com.monsterlab
 {
 	import com.monsterlab.game.gameobjects.sprites.Background;
 	import com.monsterlab.game.gameobjects.sprites.Button;
+	import com.monsterlab.game.gameobjects.sprites.Conveyor;
 	import com.monsterlab.game.gameobjects.sprites.Ingredient;
 	import com.monsterlab.game.gameobjects.sprites.IngredientContainer;
 	import com.monsterlab.game.gameobjects.sprites.Recipe;
@@ -33,7 +34,7 @@ package com.monsterlab
 		
 		public function GameManager() 
 		{
-			Background.getInstance().setBGState();
+			
 		}
 		
 		public static function getInstance (): GameManager {
@@ -52,7 +53,10 @@ package com.monsterlab
 		
 		public function startGame():void {
 			isPaused = false;
+			
 			trace("GameManager startGame is running fine");
+			spawnFrame = 125;
+			spawnTimer = spawnFrame;
 			UIManager.getInstance().closeScreens();
 			GameStage.getInstance().getTitleCardContainer().removeChild(TitleCard.getInstance());
 			GameStage.getInstance().addInterFace();
@@ -60,6 +64,8 @@ package com.monsterlab
 			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
 			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
 			GameStage.getInstance().getGameContainer_2().addChild(Hud.getInstance());
+			Conveyor.setCouvercle();
+			Background.getInstance().setBGState();
 			Recipe.initIngredientList();
 		}
 		
@@ -91,7 +97,7 @@ package com.monsterlab
 		}
 		
 		public function restart():void {
-			Background.getInstance().setBGState(true);
+			Background.getInstance().setBGState(false);
 			startGame();
 		}
 		
@@ -108,7 +114,8 @@ package com.monsterlab
 		public function reset():void {
 			GameStage.getInstance().getGameContainer_5().removeChild(Mixer.getInstance());
 			GameStage.getInstance().removeEventListener(Event.ENTER_FRAME, gameLoop);
-			GameStage.getInstance().getGameContainer_5().removeChild(Hud.getInstance());
+			GameStage.getInstance().getGameContainer_2().removeChild(Hud.getInstance());
+			Ingredient.destroyAll();
 		}
 		
 		private function gameover():void {

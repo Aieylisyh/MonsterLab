@@ -16,9 +16,7 @@ package com.monsterlab.game.gameobjects.sprites
 		{
 			super();
 			setBGState();
-			x = GameStage.MID_H;
-			y = GameStage.MID_V;
-			GameStage.getInstance().getGameContainer_1().addChild(this);
+			
 		}
 		public static function getInstance (): Background {
 			if (instance == null) instance = new Background();
@@ -27,6 +25,9 @@ package com.monsterlab.game.gameobjects.sprites
 		
 		public function setBGState(isAlert:Boolean=false ):void {
 			generateGraphics(isAlert?"BackgroundAlert":"Background");
+			x = GameStage.MID_H;
+			y = GameStage.MID_V;
+			GameStage.getInstance().getGameContainer_1().addChild(this);
 		}
 	}
 

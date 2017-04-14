@@ -66,7 +66,8 @@ package com.monsterlab.ui.screens {
 		
 		private function onClickMenu(pEvent:MouseEvent):void {
 			GameManager.getInstance().reset();
-			UIManager.getInstance().addScreen(TitleCard.getInstance());
+			UIManager.getInstance().closeScreens();
+			GameStage.getInstance().getTitleCardContainer().addChild(TitleCard.getInstance());
 		}
 		
 		/**
