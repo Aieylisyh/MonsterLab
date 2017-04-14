@@ -8,16 +8,16 @@ package com.monsterlab.game.gameobjects.sprites
 	 */
 	public class Scientist extends StateGraphic 
 	{
-		public static const SCIENTISTSTATE_PHASE1:String = "Scientist_default";
-		public static const SCIENTISTSTATE_PHASE2:String = "Scientist_happy";
-		public static const SCIENTISTSTATE_PHASE3:String = "Scientist_default";
-		public static const SCIENTISTSTATE_PHASE4:String = "Scientist_surprise";
-		public static const SCIENTISTSTATE_PHASE5:String = "Scientist_surprise";
-		public static const SCIENTISTSTATE_PHASE6:String = "Scientist_stress";
-		public static const SCIENTISTSTATE_PHASE7:String = "Scientist_angry";
-		public static const SCIENTISTSTATE_PHASE8:String = "Scientist_angry";
-		public static const SCIENTISTSTATE_PHASE9:String = "Scientist_cry";
-		public static const SCIENTISTSTATE_DIE:String = "Scientist_cry";
+		public static const SCIENTISTSTATE_PHASE1:String = "default";
+		public static const SCIENTISTSTATE_PHASE2:String = "happy";
+		public static const SCIENTISTSTATE_PHASE3:String = "default";
+		public static const SCIENTISTSTATE_PHASE4:String = "surprise";
+		public static const SCIENTISTSTATE_PHASE5:String = "surprise";
+		public static const SCIENTISTSTATE_PHASE6:String = "stress";
+		public static const SCIENTISTSTATE_PHASE7:String = "angry";
+		public static const SCIENTISTSTATE_PHASE8:String = "angry";
+		public static const SCIENTISTSTATE_PHASE9:String = "cry";
+		public static const SCIENTISTSTATE_DIE:String = "cry";
 		public var scienstState:String;
 		/**
 		 * instance unique de la classe Scientist
@@ -67,6 +67,7 @@ package com.monsterlab.game.gameobjects.sprites
 				break;
 			case Monstre.MONSTERSTATE_PHASE8:
 				scienstState = SCIENTISTSTATE_PHASE8;
+				Background.getInstance().setBGState(true);
 				break;
 			case Monstre.MONSTERSTATE_PHASE9:
 				scienstState = SCIENTISTSTATE_PHASE9;

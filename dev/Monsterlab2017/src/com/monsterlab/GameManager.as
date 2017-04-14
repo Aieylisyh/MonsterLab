@@ -1,5 +1,6 @@
 package com.monsterlab 
 {
+	import com.monsterlab.game.gameobjects.sprites.Background;
 	import com.monsterlab.game.gameobjects.sprites.Button;
 	import com.monsterlab.game.gameobjects.sprites.Ingredient;
 	import com.monsterlab.game.gameobjects.sprites.IngredientContainer;
@@ -32,6 +33,7 @@ package com.monsterlab
 		
 		public function GameManager() 
 		{
+			Background.getInstance().setBGState();
 		}
 		
 		public static function getInstance (): GameManager {
@@ -87,6 +89,7 @@ package com.monsterlab
 		}
 		
 		public function restart():void {
+			Background.getInstance().setBGState(true);
 			startGame();
 		}
 		

@@ -83,6 +83,13 @@ package com.monsterlab.game.gameobjects
 			//w h are the width and height of the sprite in flash, alignX and alignY is 0:left top 1:center center 2:right bottom
 			//i haven't test alignX alignY with 0 and 2, so if you meet a bug, try find this here
 			//using cache to save BitmapData.if the name is exactly the same, will use from cache;
+			if (graphic != null) {
+				if (graphic["parent"] != null)
+				{
+					removeChild(graphic);
+				}
+				graphic = null;
+			}
 			
 			var myBitmapData:BitmapData;
 			var bmp:Bitmap;
@@ -114,6 +121,7 @@ package com.monsterlab.game.gameobjects
 			//trace(cachedBmp["foo"]==null);
 			return graphic;
 		}
+		
 	}
 
 }

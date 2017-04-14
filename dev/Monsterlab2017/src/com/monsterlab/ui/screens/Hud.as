@@ -4,11 +4,13 @@ package com.monsterlab.ui.screens
 	import com.monsterlab.GameStage;
 	import com.monsterlab.ui.Screen;
 	import com.monsterlab.ui.UIManager;
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
+	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
-	
+	import flash.display.DisplayObjectContainer;
 	/**
 	 * ...
 	 * @author Adridro
@@ -23,7 +25,7 @@ package com.monsterlab.ui.screens
 		public var Recipe3:MovieClip;
 		public var mcRecipe:MovieClip;
 		public var mcConveyor:MovieClip;
-		
+		public var hudPart:MovieClip;
 		/**
 		 * instance unique de la classe Hud
 		 */
@@ -45,6 +47,19 @@ package com.monsterlab.ui.screens
 			y = GameStage.MID_V;
 		}
 		
+		public function getLiquidContainer():DisplayObjectContainer {
+			trace(this.numChildren);
+			var hudPart1:DisplayObjectContainer = DisplayObjectContainer(this.getChildAt(1));
+			trace(hudPart1.numChildren);
+			var hudPart2:DisplayObjectContainer = DisplayObjectContainer(hudPart1.getChildAt(1));
+			trace(hudPart2.numChildren);
+			var hudPart3:DisplayObjectContainer = DisplayObjectContainer(hudPart2.getChildAt(0));
+			trace(hudPart3.numChildren);
+			//hudPart1.removeChild(hudPart1.getChildAt(hudPart1.numChildren - 2));
+			//hudPart1.removeChild(hudPart1.getChildAt(hudPart1.numChildren - 3));
+			//return DisplayObjectContainer(hudPart1.getChildAt(hudPart1.numChildren-1));
+			return DisplayObjectContainer(hudPart3);
+		}
 		override protected function addListeners():void 
 		{
 			super.addListeners();
