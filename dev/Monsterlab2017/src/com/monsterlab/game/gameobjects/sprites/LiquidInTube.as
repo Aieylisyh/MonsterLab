@@ -6,6 +6,7 @@ package com.monsterlab.game.gameobjects.sprites
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import flash.utils.getDefinitionByName;
+	import com.monsterlab.ui.screens.Hud;
 	/**
 	 * ...
 	 * @author Song Huang
@@ -25,10 +26,10 @@ package com.monsterlab.game.gameobjects.sprites
 			var ClassReference:Class = getDefinitionByName("liquid") as Class;
             liquid = new ClassReference();
 			liquid.gotoAndStop(1);
-			liquid.scaleX = liquid.scaleY = 2.1;
-			liquid.x += 10;
-			liquid.y += 72;
-			addChild(liquid);
+			//liquid.scaleX = liquid.scaleY = 2.1;
+			//liquid.x += 10;
+			//liquid.y += 72;
+			Hud.getInstance().getLiquidContainer().addChild(liquid);
 		}
 		
 		public function setColor(color:uint):void {
@@ -38,7 +39,7 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		public function setPercentage(speed:Number):void {
-			var delta:int = Math.floor(Math.abs(speed / MixerController.MAXROTATIONSPEED) * 1.1);
+			var delta:int = Math.floor(Math.abs(speed / MixerController.MAXROTATIONSPEED) * 1.5);
 			if (delta <= 0)
 				return;
 			if (delta > 0 && liquid.currentFrame == liquid.totalFrames) {
