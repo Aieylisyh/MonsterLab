@@ -22,7 +22,7 @@ package com.monsterlab.game.gameobjects.sprites
 		public function LiquidInTube() 
 		{
 			super();
-			var ClassReference:Class = getDefinitionByName("Scientist_surprise") as Class;
+			var ClassReference:Class = getDefinitionByName("liquid") as Class;
             liquid = new ClassReference();
 			liquid.gotoAndStop(1);
 			addChild(liquid);

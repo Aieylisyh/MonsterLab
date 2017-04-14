@@ -3,6 +3,7 @@ package com.monsterlab.game.gameobjects.sprites
 	import com.monsterlab.GameStage;
 	import com.monsterlab.game.gameobjects.GameObject;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.utils.getDefinitionByName;
 	
 	/**
@@ -13,24 +14,26 @@ package com.monsterlab.game.gameobjects.sprites
 	{
 		public var myIngredient:Ingredient;
 		
-		private var graphic:MovieClip;
+		//rivate var graphic:MovieClip;
 		
-		public function IngredientContainer(pName:String) 
+		public function IngredientContainer() 
 		{
 			super();
 			x = 1400;
 			y = GameStage.MID_V * 1.365;
 			start();
-			var ClassReference:Class = getDefinitionByName(pName) as Class;
+			var sprite:Sprite = new Sprite();
+			/*var ClassReference:Class = getDefinitionByName(pName) as Class;
             graphic = new ClassReference();
 			if (graphic.totalFrames < 2) {
 				graphic.cacheAsBitmap = true; 
 				//graphic.cacheAsBitmapMatrix = new Matrix();
 			}
-			addChild(graphic);
+			addChild(graphic);*/
+			addChild(sprite);
 			GameStage.getInstance().getGameContainer_4().addChild(this);
 			//mouseChildren = false;
-			mouseEnabled = false;
+			sprite.mouseEnabled = false;
 		}
 		
 		override protected function doActionNormal():void 
