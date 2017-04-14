@@ -165,10 +165,10 @@ package com.monsterlab.game.gameobjects.sprites {
 			this.ingradient_mixAnimation_startingRotationFromCenter += rotationSpeed;
 			if (lifeTimeCount <= this.ingradient_mixAnimation_goBackTime) {
 				//go back
-				this.ingradient_mixAnimation_goLength += ingradient_mixAnimation_goSpeed;
+				this.ingradient_mixAnimation_goLength -= ingradient_mixAnimation_goSpeed;
 			}else if (elapsedTime <= this.ingradient_mixAnimation_goOutTime) {
 				//go out
-				this.ingradient_mixAnimation_goLength -= ingradient_mixAnimation_goSpeed;
+				this.ingradient_mixAnimation_goLength += ingradient_mixAnimation_goSpeed;
 			}else {
 				//go along circle
 			}
@@ -208,7 +208,8 @@ package com.monsterlab.game.gameobjects.sprites {
 		override public function destroy():void
 		{
 			isDestroyed = true;
-			removeChild(graphic);
+			if(graphic!=null)
+				removeChild(graphic);
 			graphic = null;
 			super.destroy();
 		}

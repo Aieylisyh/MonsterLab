@@ -28,15 +28,15 @@ package com.monsterlab.game.gameobjects.sprites
 			container.addChild(this);
 		}
 		
-		private function addIngredient(pAssetName:String) {
+		private function addIngredient(pAssetName:String):void {
 			var ClassReference:Class = getDefinitionByName("Ingredient_"+pAssetName) as Class;
 				var graphic:MovieClip = new ClassReference();
 				if (graphic.totalFrames < 2) {
 					graphic.cacheAsBitmap = true; 
 					//graphic.cacheAsBitmapMatrix = new Matrix();
 				}
-				graphic.scaleX = graphic.scaleY = 0.75;
-				graphic.x = graphicIngredients.length * 120 - 120;
+				graphic.scaleX = graphic.scaleY = 0.8;
+				graphic.x = graphicIngredients.length * 130 - 130;
 				graphic.y = 10;
 				addChild(graphic);
 				graphicIngredients.push(graphic);

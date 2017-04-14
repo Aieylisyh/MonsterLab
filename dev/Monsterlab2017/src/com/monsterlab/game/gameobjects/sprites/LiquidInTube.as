@@ -39,7 +39,7 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		public function setPercentage(speed:Number):void {
-			var delta:int = Math.floor(Math.abs(speed / MixerController.MAXROTATIONSPEED) * 1.5);
+			var delta:int = Math.floor(Math.abs(speed / MixerController.MAXROTATIONSPEED) * 1.9);
 			if (delta <= 0)
 				return;
 			if (delta > 0 && liquid.currentFrame == liquid.totalFrames) {

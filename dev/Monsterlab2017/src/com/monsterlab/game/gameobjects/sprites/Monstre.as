@@ -35,7 +35,8 @@ package com.monsterlab.game.gameobjects.sprites
 		public function Monstre() 
 		{
 			skip = true;
-			ID = Math.floor(Math.random() * 2 + 1);
+			//ID = Math.floor(Math.random() * 2 + 1);
+			ID = 1;
 			frameToMutate_count = frameToMutate;
 			super();
 			start();

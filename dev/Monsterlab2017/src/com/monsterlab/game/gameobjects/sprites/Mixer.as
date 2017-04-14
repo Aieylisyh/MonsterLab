@@ -190,7 +190,7 @@ package com.monsterlab.game.gameobjects.sprites
 			else
 				trace("wrong ingredients.length:"+ingredients.length);
 			for (var i:int = 0; i < 6; i++ ) {
-				var eff0:Effect = new Effect("particle_mixer");
+				var eff0:Effect = new Effect("Ingredient_" +ingredients[Math.floor(Math.random()*ingredients.length)].type);
 				eff0.init_ingradient_mixAnimation(this.x, this.y, 60 *i , int.MAX_VALUE, 4 * sign, 60 * i,  4.6, 30, 25);
 				eff0.scaleX = eff0.scaleY = 0.55;
 				ColorManager.setColor(eff0,color);

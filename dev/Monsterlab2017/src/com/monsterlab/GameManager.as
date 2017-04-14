@@ -24,14 +24,18 @@ package com.monsterlab
 		protected static var instance: GameManager;
 		public var btnTestAnim:Button;
 		private var isPaused:Boolean;
-		
+		private var score:int = 0;
 		private var spawnTimer:int = 125;
 		public var spawnFrame:int = 125;
-		
+		private var ingredientIndex:int=0
 		public function spawn():void {
 			if (Math.random() < 0.2)
 				createRecipe();
-			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
+			ingredientIndex++;
+			if (ingredientIndex >= Recipe.ingredientList.length)
+				ingredientIndex = 0;
+			var lInfos:Vector.<String> = Recipe.ingredientList[ingredientIndex];
+			
 			var lContainer:IngredientContainer	 = new IngredientContainer();
 			lContainer.myIngredient = new Ingredient( -1, lContainer, true, lInfos[0], lInfos[1]);
 		}
@@ -70,6 +74,8 @@ package com.monsterlab
 			trace("!!");
 			Monstre.getInstance();
 			Scientist.getInstance();
+			score = 0;
+			Hud.getInstance().setScore(score/30);
 			createRecipe();
 		}
 		
@@ -93,10 +99,9 @@ package com.monsterlab
 				}else {
 					obj.doAction();
 				}
-				
-				
 			} 
-			
+			Hud.getInstance().setScore(score/30);
+			score++;
 			if (spawnTimer == spawnFrame) {
 				spawn();
 				spawnTimer = 0;

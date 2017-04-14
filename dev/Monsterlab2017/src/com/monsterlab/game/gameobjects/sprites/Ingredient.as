@@ -82,7 +82,7 @@ package com.monsterlab.game.gameobjects.sprites
 				}
 			}
 			init(pContainer, Mixer.getInstance(), pX, pY, 0, 1,130, 85);
-			ColorManager.setColor(this, color);
+			//ColorManager.setColor(this, color);
 			//trace("Ingredient color is " + color);
 			pContainer.addChild(this);
 			list.push(this);

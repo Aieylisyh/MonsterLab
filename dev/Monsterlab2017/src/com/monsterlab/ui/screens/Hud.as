@@ -8,6 +8,7 @@ package com.monsterlab.ui.screens
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
+	import flash.display3D.textures.Texture;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.display.DisplayObjectContainer;
@@ -52,10 +53,10 @@ package com.monsterlab.ui.screens
 			hudPart.hudBottom.x = 2;
 			hudPart.hudBottom.y = -hudPart.hudBottom.height / 2 + (2430 - 2048) / 2 + GameStage.MID_V - 12;
 			var hudPart1:DisplayObjectContainer = DisplayObjectContainer(this.getChildAt(1));
-			hudPart1.getChildAt(2).y-=255;
-			hudPart1.getChildAt(3).y-=255;
-			hudPart1.getChildAt(4).y-=255;
-			hudPart1.getChildAt(5).y-=255;
+			hudPart1.getChildAt(2).y-=258;
+			hudPart1.getChildAt(3).y-=258;
+			hudPart1.getChildAt(4).y-=258;
+			hudPart1.getChildAt(5).y -= 258;
 		}
 		
 		public function getLiquidContainer():DisplayObjectContainer {
@@ -91,10 +92,18 @@ package com.monsterlab.ui.screens
 		{
 			super.addListeners();
 			btnPause = hudPart.hudTop.btnPause;
-			scoreBar = hudPart.hudTop.scoreBar.score;
-			scoreBar.text = "10";
-			trace(scoreBar.text);
+			var scoreBarParent:DisplayObjectContainer = DisplayObjectContainer(hudPart.hudTop.getChildAt(0));
+			scoreBar = TextField(scoreBarParent.getChildAt(1));
+			scoreBar.y += 10;
+			//scoreBar = hudPart.hudTop.scoreBar.score;
+			//scoreBar.text = "22";
+			//trace("scoreBar"+scoreBar.text);
 			btnPause.addEventListener(MouseEvent.CLICK, onClickPause);
+		}
+		
+		
+		public function setScore(i:int):void {
+			scoreBar.text = i.toString();
 		}
 		
 		override protected function removeListeners():void 
