@@ -38,7 +38,7 @@ package com.monsterlab.game.gameobjects.sprites
 		public var isDraging:Boolean = false;
 		private var mixerRadius:Number  = 250;
 		private var mixerDragFactor:Number  = 1;
-		public static var MAXROTATIONSPEED:int = 25;
+		public static var MAXROTATIONSPEED:int = 24;
 		//private var text1:TextField;
 		//private var text2:TextField;
 		private var lastPos:Point;

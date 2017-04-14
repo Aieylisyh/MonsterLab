@@ -31,11 +31,13 @@ package com.monsterlab.game.gameobjects.sprites
 		private var frameToMutate_count:int;
 		public function Monstre() 
 		{
-			super();
-			start();
+			skip = true;
 			ID = Math.floor(Math.random() * 2 + 1);
 			frameToMutate_count = frameToMutate;
+			super();
+			start();
 			handleNewMonsterState(MONSTERSTATE_PHASE1);
+			//setState("phase1");
 		}
 		
 		public static function getInstance (): Monstre {
@@ -96,8 +98,10 @@ package com.monsterlab.game.gameobjects.sprites
 		}
 		
 		private function handleNewMonsterState(newState:String):void {
-			assetName = "Monstre" + ID.toString;
+			assetName = "Monstre" + ID.toString();
 			monsterState = newState;
+			trace(assetName);
+			trace(assetName+"_" + monsterState);
 			setState(monsterState);
 		}
 		

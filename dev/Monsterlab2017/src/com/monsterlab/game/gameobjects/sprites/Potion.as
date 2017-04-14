@@ -23,6 +23,7 @@ package com.monsterlab.game.gameobjects.sprites
 		public function Potion(pType:String, pColor1:String, pColor2:String = "0x7F7F7F",pColor3:String = "0x7F7F7F") 
 		{
 			super("Player");
+			scaleX = scaleY = 3;
 			ingredient1Color = pColor1;
 			ingredient2Color = pColor2;
 			ingredient3Color = pColor3;
