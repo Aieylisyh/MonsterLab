@@ -45,6 +45,11 @@ package com.monsterlab.ui.screens
 			super();
 			x = GameStage.MID_H;
 			y = GameStage.MID_V;
+			hudPart.hudTop.x = 0;
+			hudPart.hudTop.y = hudPart.hudTop.height / 2 - GameStage.MID_V;
+			
+			hudPart.hudBottom.x = 0;
+			hudPart.hudBottom.y = -hudPart.hudBottom.height/2+(2430-2048)/2+GameStage.MID_V;
 		}
 		
 		public function getLiquidContainer():DisplayObjectContainer {
@@ -63,6 +68,7 @@ package com.monsterlab.ui.screens
 		override protected function addListeners():void 
 		{
 			super.addListeners();
+			btnPause = hudPart.hudTop.btnPause;
 			btnPause.addEventListener(MouseEvent.CLICK, onClickPause);
 		}
 		
