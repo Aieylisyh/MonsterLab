@@ -4,7 +4,10 @@ package com.monsterlab
 	import com.monsterlab.game.gameobjects.sprites.Button;
 	import com.monsterlab.game.gameobjects.sprites.Ingredient;
 	import com.monsterlab.game.gameobjects.sprites.IngredientContainer;
+	import com.monsterlab.game.gameobjects.sprites.Monstre;
 	import com.monsterlab.game.gameobjects.sprites.Recipe;
+	import com.monsterlab.game.gameobjects.sprites.RecipeGraphic;
+	import com.monsterlab.game.gameobjects.sprites.Scientist;
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
 	import com.monsterlab.game.gameobjects.sprites.Effect;
@@ -26,6 +29,8 @@ package com.monsterlab
 		public var spawnFrame:int = 125;
 		
 		public function spawn():void {
+			if (Math.random() < 0.2)
+				createRecipe();
 			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
 			var lContainer:IngredientContainer	 = new IngredientContainer();
 			lContainer.myIngredient = new Ingredient( -1, lContainer, false, lInfos[0], lInfos[1]);
@@ -34,6 +39,7 @@ package com.monsterlab
 		public function GameManager() 
 		{
 			Background.getInstance().setBGState();
+			SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
 		}
 		
 		public static function getInstance (): GameManager {
@@ -56,9 +62,22 @@ package com.monsterlab
 			GameStage.getInstance().addInterFace();
 			GameStage.getInstance().addEventListener(Event.ENTER_FRAME, gameLoop);
 			GameStage.getInstance().getGameContainer_5().addChild(Mixer.getInstance());
-			//SoundManager.getInstance().startNewBackgroundMusic("sound_music1");
+			SoundManager.getInstance().startNewBackgroundMusic("sound_music2");
 			GameStage.getInstance().getGameContainer_2().addChild(Hud.getInstance());
 			Recipe.initIngredientList();
+			trace("!!");
+			Monstre.getInstance();
+			Scientist.getInstance();
+			createRecipe();
+		}
+		
+		private function createRecipe():void {
+			SoundManager.getInstance().makeSound("sound_gaz");
+			var id:int = RecipeGraphic.findEmptyContainerID();
+			trace("!id!"+id);
+			if (id < 0)
+				return;
+			new RecipeGraphic(Recipe.createRecipe(), id);
 		}
 		
 		private function gameLoop(_:Event):void {

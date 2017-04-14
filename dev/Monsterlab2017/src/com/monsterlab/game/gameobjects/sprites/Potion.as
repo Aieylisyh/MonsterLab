@@ -1,6 +1,7 @@
 package com.monsterlab.game.gameobjects.sprites 
 {
 		import com.monsterlab.game.gameobjects.GameObject;
+		import com.utils.SoundManager;
 		import flash.display.DisplayObject;
 		import flash.display.MovieClip;
 		import flash.display.Sprite;
@@ -22,12 +23,11 @@ package com.monsterlab.game.gameobjects.sprites
 		private var ingredient3Color:String = "0x7F7F7F";
 		public function Potion(pType:String, pColor1:String, pColor2:String = "0x7F7F7F",pColor3:String = "0x7F7F7F") 
 		{
-			super("Player");
-			scaleX = scaleY = 3;
+			super("Fiole_ready");
 			ingredient1Color = pColor1;
 			ingredient2Color = pColor2;
 			ingredient3Color = pColor3;
-			init(Mixer.getInstance().getPotionContainer(), Monstre.getInstance(), Math.random() * 280 - 140, 0, 0, 0.6, 120);
+			init(Mixer.getInstance().getPotionContainer(), Monstre.getInstance(), 40, 60, 0,2, 300);
 			type = pType;
 			color = ColorManager.setColor(this, pColor1, pColor2, pColor3);
 			trace("Potion color is "+color);
@@ -42,6 +42,7 @@ package com.monsterlab.game.gameobjects.sprites
 			willGoBack = false;
 			willBeDestroyed = true;
 			Mixer.getInstance().potionUsed();
+			this.willBeDestroyed = true;
 		}
 		
 		override protected function dragingFunction():void {
@@ -51,6 +52,10 @@ package com.monsterlab.game.gameobjects.sprites
 			eff.init_rotateAndTransit( Math.random() *120-60, 55, 0, 24+Math.random() *30, 0, 0, 0,0,0,0.3);
 			ColorManager.setColor(eff, color);
 			this.addChildAt(eff,1);
+		}
+		
+		override protected function onStartDrag():void {
+			SoundManager.getInstance().makeSound("sound_bubblesmall");
 		}
 		
 		override protected function idleFunction():void {
@@ -76,13 +81,15 @@ package com.monsterlab.game.gameobjects.sprites
 				if (recipe.recipeIngredients.length == 0)
 					continue;
 				var result:Boolean = true;
-				for each(var colorName:String in recipe.recipeIngredients) {
-					if (colorName != ingredient1Color || colorName != ingredient2Color|| colorName != ingredient3Color) {
+				for each(var colorName:Vector.<String> in recipe.recipeIngredients) {
+					if (colorName[1]!= ingredient1Color || colorName[1] != ingredient2Color|| colorName[1] != ingredient3Color) {
 						result = false;
 					}
 				}
-				if (result)
+				if (result) {
+					recipe.destroy();
 					return true;
+				}
 			}
 			return false;
 		}

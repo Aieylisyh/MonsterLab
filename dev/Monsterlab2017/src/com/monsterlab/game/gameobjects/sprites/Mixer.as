@@ -161,7 +161,8 @@ package com.monsterlab.game.gameobjects.sprites
 			if (!enoughToMix && !liquideAnimation.isInProgress()) {
 				//place image
 				trace("addIngredient 1");
-				ingredients.push(ingredient)
+				ingredients.push(ingredient);
+				SoundManager.getInstance().makeSound("sound_type");
 				return true;
 			}else {
 				trace("can not addIngredient");
@@ -228,6 +229,8 @@ package com.monsterlab.game.gameobjects.sprites
 			else
 				trace("wrong ingredients.length:"+ingredients.length);
 			rotateSpeed = 0;
+			SoundManager.getInstance().makeSound("sound_water");
+			SoundManager.getInstance().makeSound("sound_metal");
 			deleteIngredients();
 			hasPotion = true;
 		}

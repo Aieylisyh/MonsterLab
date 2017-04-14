@@ -60,6 +60,22 @@ package com.monsterlab.ui.screens
 			//return DisplayObjectContainer(hudPart1.getChildAt(hudPart1.numChildren-1));
 			return DisplayObjectContainer(hudPart3);
 		}
+		
+		public function getRecipeContainer(i:int):DisplayObjectContainer {
+			trace(this.numChildren);
+			var hudPart1:DisplayObjectContainer = DisplayObjectContainer(this.getChildAt(1));
+			//trace("1111   "+hudPart1.numChildren);
+			//hudPart1.removeChild(hudPart1.getChildAt(2));
+			//hudPart1.removeChild(hudPart1.getChildAt(2));
+			//hudPart1.removeChild(hudPart1.getChildAt(2));
+			//hudPart1.removeChild(hudPart1.getChildAt(2));
+			//hudPart1.removeChild(hudPart1.getChildAt(0));
+			
+			//hudPart1.removeChild(hudPart1.getChildAt(hudPart1.numChildren - 3));
+			//return DisplayObjectContainer(hudPart1.getChildAt(hudPart1.numChildren-1));
+			return DisplayObjectContainer(hudPart1.getChildAt(i+1));
+		}
+		
 		override protected function addListeners():void 
 		{
 			super.addListeners();

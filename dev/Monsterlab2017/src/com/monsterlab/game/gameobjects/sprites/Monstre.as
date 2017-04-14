@@ -1,9 +1,11 @@
 package com.monsterlab.game.gameobjects.sprites 
 {
+	import com.monsterlab.GameStage;
 	import com.monsterlab.game.gameobjects.GameObject;
 	import com.monsterlab.game.gameobjects.StateGraphic;
 	import com.monsterlab.ui.ColorManager;
 	import com.monsterlab.game.gameobjects.sprites.Scientist;
+	import com.utils.SoundManager;
 	import flash.utils.Timer;
 	/**
 	 * ...
@@ -37,6 +39,9 @@ package com.monsterlab.game.gameobjects.sprites
 			super();
 			start();
 			handleNewMonsterState(MONSTERSTATE_PHASE1);
+			GameStage.getInstance().getGameContainer_3().addChild(this);
+			this.x = GameStage.MID_H-100;
+			this.y = GameStage.MID_V-50;
 			//setState("phase1");
 		}
 		
@@ -52,6 +57,7 @@ package com.monsterlab.game.gameobjects.sprites
 			trace("red " + red);
 			trace("green " + red);
 			trace("blue " + red);*/
+			trace("!!!!usePotion");
 			if (pPotion.compareRecette()) {
 				var newState:String = getNewMonsterState();
 				handleNewMonsterState(newState);
@@ -59,8 +65,9 @@ package com.monsterlab.game.gameobjects.sprites
 			Scientist.getInstance().feedbackByMonster(newState);
 		}
 		
-		private function getNewMonsterState():String{
-			var newState:String = "";
+		private function getNewMonsterState():String {
+			
+			var newState:String = monsterState;
 			switch(newState) {
 			case MONSTERSTATE_PHASE1:
 				newState = MONSTERSTATE_PHASE2;
@@ -94,15 +101,15 @@ package com.monsterlab.game.gameobjects.sprites
 				trace("monster unexpected state changed");
 				break;
 			}
+			trace("monster state changed to "+newState);
 			return newState;
 		}
 		
 		private function handleNewMonsterState(newState:String):void {
 			assetName = "Monstre" + ID.toString();
 			monsterState = newState;
-			trace(assetName);
-			trace(assetName+"_" + monsterState);
 			setState(monsterState);
+			SoundManager.getInstance().makeSound("sound_monster"+(Math.floor(Math.random()*6+1)).toString());
 		}
 		
 		private function doMutation():void {
