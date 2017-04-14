@@ -101,6 +101,7 @@ package com
 			lLoader.addDisplayFile("ui.swf");
 			lLoader.addDisplayFile("hud.swf");
 			lLoader.addDisplayFile("sounds.swf");
+			lLoader.addDisplayFile("ingredient.swf");
 			
 			lLoader.addEventListener(AssetsLoaderEvent.PROGRESS, onLoadProgress);
 			lLoader.addEventListener(AssetsLoaderEvent.COMPLETE, onLoadComplete);
