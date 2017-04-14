@@ -21,7 +21,6 @@ package com.monsterlab.ui.screens {
 		//public var mcBackground:Sprite;
 		public var btnPlay:SimpleButton;
 		public var btnOption:SimpleButton;
-		public var btnCredit:SimpleButton;
 
 		public function TitleCard() 
 		{
@@ -36,13 +35,11 @@ package com.monsterlab.ui.screens {
 		override protected function addListeners():void {
 			btnPlay.addEventListener(MouseEvent.CLICK, startGame);
 			btnOption.addEventListener(MouseEvent.CLICK, onClickOption);
-			btnCredit.addEventListener(MouseEvent.CLICK, onClickCredit);
 		}
 		
 		override protected function removeListeners():void {
 			btnPlay.removeEventListener(MouseEvent.CLICK, startGame);
 			btnOption.removeEventListener(MouseEvent.CLICK, onClickOption);
-			btnCredit.removeEventListener(MouseEvent.CLICK, onClickCredit);
 		}
 		
 		private function startGame(pEvent:MouseEvent):void {
@@ -52,10 +49,17 @@ package com.monsterlab.ui.screens {
 		private function onClickOption(pEvent:MouseEvent):void {
 			OptionScreen.wasTitleCard = true;
 			UIManager.getInstance().addScreen(OptionScreen.getInstance());
+			hideBtn();
 		}
 		
-		private function onClickCredit(pEvent:MouseEvent):void {
-			UIManager.getInstance().addScreen(CreditScreen.getInstance());
+		private function hideBtn():void {
+			btnPlay.visible = false;
+			btnOption.visible = false;
+		}
+		
+		public function showBtn():void {
+			btnPlay.visible = true;
+			btnOption.visible = true;
 		}
 		
 		/**

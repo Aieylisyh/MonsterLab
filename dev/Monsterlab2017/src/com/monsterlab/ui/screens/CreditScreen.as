@@ -40,7 +40,7 @@ package com.monsterlab.ui.screens {
 		}
 		
 		private function onClickBack(pEvent:MouseEvent):void {
-			UIManager.getInstance().addScreen(TitleCard.getInstance());
+			UIManager.getInstance().addScreen(OptionScreen.getInstance());
 		}
 		
 		

@@ -27,6 +27,8 @@ package com.monsterlab.ui.screens {
 		public var btnVolume:SimpleButton;
 		public var btnBack:SimpleButton;
 		public var btnScore:SimpleButton;
+		
+		public var btnCredit:SimpleButton;
 
 		public function OptionScreen() 
 		{
@@ -41,11 +43,17 @@ package com.monsterlab.ui.screens {
 		override protected function addListeners():void {
 			btnBack.addEventListener(MouseEvent.CLICK, onClickBack);
 			btnVolume.addEventListener(MouseEvent.CLICK, onClickSound);
+			btnCredit.addEventListener(MouseEvent.CLICK, onClickCredit);
 		}
 		
 		override protected function removeListeners():void {
 			btnBack.removeEventListener(MouseEvent.CLICK, onClickBack);
 			btnVolume.removeEventListener(MouseEvent.CLICK, onClickSound);
+			btnCredit.removeEventListener(MouseEvent.CLICK, onClickCredit);
+		}
+		
+		private function onClickCredit(pEvent:MouseEvent):void {
+			UIManager.getInstance().addScreen(CreditScreen.getInstance());
 		}
 		
 		private function onClickSound(pEvent:MouseEvent):void {
@@ -55,7 +63,8 @@ package com.monsterlab.ui.screens {
 		private function onClickBack(pEvent:MouseEvent):void {
 			if (wasTitleCard) {
 				wasTitleCard = false;	
-				UIManager.getInstance().addScreen(TitleCard.getInstance());
+				UIManager.getInstance().closeScreens();
+				TitleCard.getInstance().showBtn();
 			}
 			else UIManager.getInstance().addScreen(PauseScreen.getInstance());
 		}
