@@ -105,6 +105,7 @@
 			startingMouseY = e.stageY;
 			willGoBack = false;
 			myMouseEvent = e;
+			onStartDrag();
 			//forceUpdateMouseMove = 2;
 			//trace(startingMouseX+" startingMouse "+startingMouseY);
 			//trace(parent==GameStage.getInstance().getGameContainer_5());
@@ -132,6 +133,9 @@
 		
 		protected function onDragToTarget():void {
 			 willGoBack = true;
+		}
+		
+		protected function onStartDrag():void {
 		}
 		
 		private function myOnMouseMove(e:MouseEvent=null):void {

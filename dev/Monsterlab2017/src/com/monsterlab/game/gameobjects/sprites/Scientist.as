@@ -1,7 +1,9 @@
 package com.monsterlab.game.gameobjects.sprites 
 {
+	import com.monsterlab.GameStage;
 	import com.monsterlab.game.gameobjects.StateGraphic;
 	import com.monsterlab.game.gameobjects.sprites.Monstre;
+	import com.utils.SoundManager;
 	/**
 	 * ...
 	 * @author COQUERELLE Killian
@@ -37,6 +39,9 @@ package com.monsterlab.game.gameobjects.sprites
 		{
 			super();
 			scienstState = SCIENTISTSTATE_PHASE1;
+			GameStage.getInstance().getGameContainer_3().addChild(this);
+			this.x = GameStage.MID_H+490;
+			this.y = GameStage.MID_V-240;
 		}
 		
 		public function feedbackByMonster(state:String):void {
@@ -68,6 +73,7 @@ package com.monsterlab.game.gameobjects.sprites
 			case Monstre.MONSTERSTATE_PHASE8:
 				scienstState = SCIENTISTSTATE_PHASE8;
 				Background.getInstance().setBGState(true);
+				SoundManager.getInstance().startNewBackgroundMusic("sound_music3");
 				break;
 			case Monstre.MONSTERSTATE_PHASE9:
 				scienstState = SCIENTISTSTATE_PHASE9;

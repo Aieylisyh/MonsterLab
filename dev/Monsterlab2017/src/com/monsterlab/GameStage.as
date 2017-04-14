@@ -185,6 +185,8 @@ package com.monsterlab {
 		public function getPopInContainer (): Sprite {
 			return popinContainer;
 		}
+		
+		
 				
 		/**
 		 * détruit l'instance unique et met sa référence interne à null

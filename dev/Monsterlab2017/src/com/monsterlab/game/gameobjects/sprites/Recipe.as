@@ -10,10 +10,10 @@ package com.monsterlab.game.gameobjects.sprites
 	public class Recipe extends GameObject 
 	{
 		public static var ingredientList:Vector.<Vector.<String>>;
-		public static var recipeList:Vector.<Recipe>;
+		public static var recipeList:Vector.<Recipe>= new Vector.<Recipe>();
 		
-		public var recipeIngredients:Vector.<String>;
-		
+		public var recipeIngredients:Vector.<Vector.<String>>=new Vector.<Vector.<String>>();
+		public var myRecipeGraphic:RecipeGraphic;
 		public function Recipe() 
 		{
 			super();
@@ -42,13 +42,16 @@ package com.monsterlab.game.gameobjects.sprites
 			return pIngredient;
 		}
 		
-		public static function createRecipe():void {
+		public static function createRecipe():Recipe {
 			var lRecipe:Recipe = new Recipe();
+			trace("11!"	);
 			var lList:Vector.<Vector.<String>> = selectIngredients(3, ingredientList);
+			trace(lList);
 			for (var i:int = 0; i < lList.length; i++) {
-				lRecipe.recipeIngredients.push(lList[i][1]);
+				lRecipe.recipeIngredients.push(lList[i]);
 			}
-			//lRecipe.recipeIngredients.sort();
+			trace("!"+lRecipe);
+			return lRecipe;
 		}
 		
 		public static function selectIngredients(pNum:int, pList:Vector.<Vector.<String>>):Vector.<Vector.<String>>{
@@ -66,6 +69,16 @@ package com.monsterlab.game.gameobjects.sprites
 			
 			return lArray;
 		}
+		override public function destroy():void
+		{
+			
+			var i:int = recipeList.indexOf(this);
+			recipeList.splice(i, 1);
+			if (myRecipeGraphic != null )
+				myRecipeGraphic.destroy();
+			super.destroy();
+		}
 	}
+	
 
 }

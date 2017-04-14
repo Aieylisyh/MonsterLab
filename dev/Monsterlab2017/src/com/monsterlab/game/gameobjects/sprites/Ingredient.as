@@ -3,6 +3,7 @@ package com.monsterlab.game.gameobjects.sprites
 	import com.monsterlab.GameStage;
 	import com.monsterlab.game.gameobjects.GameObject;
 	import com.monsterlab.game.gameobjects.StateGraphic;
+	import com.utils.SoundManager;
 	import flash.display.DisplayObject;
 	import com.monsterlab.GameStage;
 	import flash.display.Sprite;
@@ -108,6 +109,10 @@ package com.monsterlab.game.gameobjects.sprites
 		override protected function idleFunction():void {
 			//this.rotation += rotationSpeed;
 			//rotationSpeed += rotationAcc;
+		}
+		
+		override protected function onStartDrag():void {
+			SoundManager.getInstance().makeSound("sound_bubble");
 		}
 		
 		override protected function dragingFunction():void {
