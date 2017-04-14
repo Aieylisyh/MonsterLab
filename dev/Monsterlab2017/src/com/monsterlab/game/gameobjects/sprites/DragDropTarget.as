@@ -19,8 +19,6 @@
 		protected var assetName:String;
 		private var graphic:MovieClip;
 		private var speed:Point = new Point(0, 0);
-		//private var rotationSpeed:Number = 0;
-		//private var rotationAcc:Number = 0;
 		private var startingX:Number;
 		private var startingY:Number;
 		private var startingX_drag:Number;
