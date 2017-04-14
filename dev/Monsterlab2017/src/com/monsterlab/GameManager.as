@@ -3,7 +3,6 @@ package com.monsterlab
 	import com.monsterlab.game.gameobjects.sprites.Button;
 	import com.monsterlab.game.gameobjects.sprites.Ingredient;
 	import com.monsterlab.game.gameobjects.sprites.IngredientContainer;
-	import com.monsterlab.game.gameobjects.sprites.Player;
 	import com.monsterlab.game.gameobjects.sprites.Recipe;
 	import com.monsterlab.ui.UIManager;
 	import flash.events.Event;
@@ -26,13 +25,9 @@ package com.monsterlab
 		public var spawnFrame:int = 125;
 		
 		public function spawn():void {
-			trace(11);
 			var lInfos:Vector.<String> = Recipe.ingredientList[Math.floor(Math.random() * Recipe.ingredientList.length)];
-			trace(1);
 			var lContainer:IngredientContainer	 = new IngredientContainer();
-			trace(2);
-			lContainer.myIngredient = new Ingredient( -1, lContainer, true, lInfos[0], lInfos[1]);
-			trace(3);
+			lContainer.myIngredient = new Ingredient( -1, lContainer, false, lInfos[0], lInfos[1]);
 		}
 		
 		public function GameManager() 

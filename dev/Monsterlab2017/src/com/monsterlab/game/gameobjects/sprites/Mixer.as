@@ -47,9 +47,10 @@ package com.monsterlab.game.gameobjects.sprites
 		public function Mixer() 
 		{
 			super();
+			scaleX = scaleY = 2.1;
 			generateGraphics("mixer")
-			x = GameStage.MID_H;
-			y = GameStage.SAFE_ZONE_HEIGHT * 0.9;
+			x = GameStage.MID_H-10;
+			y = GameStage.SAFE_ZONE_HEIGHT * 0.885;
 			controller = new MixerController(this);
 			controller.start();//receive event, can drag
 			start();
@@ -189,7 +190,8 @@ package com.monsterlab.game.gameobjects.sprites
 				trace("wrong ingredients.length:"+ingredients.length);
 			for (var i:int = 0; i < 6; i++ ) {
 				var eff0:Effect = new Effect("particle_mixer");
-				eff0.init_ingradient_mixAnimation(this.x, this.y, 0, int.MAX_VALUE, 4 * sign, 60*i,     4, 25, 22);
+				eff0.init_ingradient_mixAnimation(this.x, this.y, 60 *i , int.MAX_VALUE, 4 * sign, 60 * i,  4.6, 30, 25);
+				eff0.scaleX = eff0.scaleY = 0.55;
 				ColorManager.setColor(eff0,color);
 				effs.push(eff0);
 			}

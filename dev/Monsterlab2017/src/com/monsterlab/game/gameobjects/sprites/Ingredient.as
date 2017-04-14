@@ -115,7 +115,8 @@ package com.monsterlab.game.gameobjects.sprites
 				return;
 			var eff:Effect = new Effect("particle_whiteball");
 			var t:Number = Math.random() * 360;
-			eff.init_rotateAndTransit(0, -10, 0, 50+Math.random() *22, 1.5*FMath.xFactorByRotation(t), 1.5*FMath.yFactorByRotation(t), 4);
+			eff.init_rotateAndTransit(0, -10, 0, 104 + Math.random() * 40, 1.6 * FMath.xFactorByRotation(t), 1.6 * FMath.yFactorByRotation(t), 4);
+			eff.scaleX = eff.scaleY = 0.5;
 			ColorManager.setColor(eff, color);
 			this.addChildAt(eff,1);
 		}

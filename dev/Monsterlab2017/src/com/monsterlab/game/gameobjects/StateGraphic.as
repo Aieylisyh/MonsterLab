@@ -82,10 +82,11 @@ package com.monsterlab.game.gameobjects {
 		protected const RAD2DEG:Number = 180 / Math.PI;
 		public var life:int;
 		public var speedShoot:Number = 10;
-		
+		protected var skip:Boolean = false;
 		public function StateGraphic() 
 		{
 			super();
+			if (skip) return;
 			if (assetName == null) assetName = getQualifiedClassName(this).split("::").pop();
 			setState (DEFAULT_STATE);
 		}

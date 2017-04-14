@@ -25,13 +25,16 @@ package com.monsterlab.game.gameobjects.sprites
 			var ClassReference:Class = getDefinitionByName("liquid") as Class;
             liquid = new ClassReference();
 			liquid.gotoAndStop(1);
+			liquid.scaleX = liquid.scaleY = 2.1;
+			liquid.x += 10;
+			liquid.y += 72;
 			addChild(liquid);
 		}
 		
 		public function setColor(color:uint):void {
 			var myColorTransform:ColorTransform = new ColorTransform();
 			myColorTransform.color = color;
-			liquid.getChildAt(0).transform.colorTransform = myColorTransform;
+			liquid.transform.colorTransform = myColorTransform;
 		}
 		
 		public function setPercentage(speed:Number):void {
