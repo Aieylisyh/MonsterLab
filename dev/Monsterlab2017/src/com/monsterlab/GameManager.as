@@ -128,6 +128,7 @@ package com.monsterlab
 			GameStage.getInstance().getGameContainer_5().removeChild(Mixer.getInstance());
 			GameStage.getInstance().removeEventListener(Event.ENTER_FRAME, gameLoop);
 			GameStage.getInstance().getGameContainer_5().removeChild(Hud.getInstance());
+			Ingredient.destroyAll();
 		}
 		
 		private function gameover():void {

@@ -56,6 +56,8 @@ package com.monsterlab.game.gameobjects.sprites
 			new <String>["baloncosmique", "0x74F4BF"],
 			new <String>["planteelegante", "0xED9E46"]
 		];
+		
+		private var list:Vector.<Ingredient> = new Vector.<Ingredient>();
 
 		public var type:String;
 		public var color:String;
@@ -83,6 +85,7 @@ package com.monsterlab.game.gameobjects.sprites
 			ColorManager.setColor(this, color);
 			//trace("Ingredient color is " + color);
 			pContainer.addChild(this);
+			list.push(this);
 			start();
 		}
 		
@@ -128,6 +131,12 @@ package com.monsterlab.game.gameobjects.sprites
 		
 		private function drawHeart():void {
 			
+		}
+		
+		public static function destroyAll():void {
+			for (var i:int = list.length - 1; i >= 0; i--) {
+				list[i].destroy();
+			}
 		}
 	}
 }
